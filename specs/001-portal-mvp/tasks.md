@@ -77,21 +77,21 @@ This is a web application with:
 
 **Unit Tests (70%)**
 
-- [ ] T025 [P] [US1] Unit test for User model validation in backend/tests/unit/models/test_user.py (email format, password hashing, role enum)
-- [ ] T026 [P] [US1] Unit test for password_hasher utility in backend/tests/unit/utils/test_password_hasher.py (hash generation, verification)
-- [ ] T027 [P] [US1] Unit test for JWT handler utility in backend/tests/unit/utils/test_jwt_handler.py (token creation, validation, expiration)
-- [ ] T028 [P] [US1] Unit test for UserRepository CRUD operations in backend/tests/unit/repositories/test_user_repository.py (create, get by email, unique constraint)
-- [ ] T029 [P] [US1] Unit test for AuthService registration logic in backend/tests/unit/services/test_auth_service_register.py (validation, duplicate email, password requirements)
-- [ ] T030 [P] [US1] Unit test for AuthService login logic in backend/tests/unit/services/test_auth_service_login.py (valid credentials, invalid credentials, generic error message)
-- [ ] T031 [P] [US1] Unit test for auth middleware in backend/tests/unit/middleware/test_auth_middleware.py (valid token, expired token, missing token)
+- [X] T025 [P] [US1] Unit test for User model validation in backend/tests/unit/models/test_user.py (email format, password hashing, role enum)
+- [X] T026 [P] [US1] Unit test for password_hasher utility in backend/tests/unit/utils/test_password_hasher.py (hash generation, verification)
+- [X] T027 [P] [US1] Unit test for JWT handler utility in backend/tests/unit/utils/test_jwt_handler.py (token creation, validation, expiration)
+- [X] T028 [P] [US1] Unit test for UserRepository CRUD operations in backend/tests/unit/repositories/test_user_repository.py (create, get by email, unique constraint)
+- [X] T029 [P] [US1] Unit test for AuthService registration logic in backend/tests/unit/services/test_auth_service_register.py (validation, duplicate email, password requirements)
+- [X] T030 [P] [US1] Unit test for AuthService login logic in backend/tests/unit/services/test_auth_service_login.py (valid credentials, invalid credentials, generic error message)
+- [X] T031 [P] [US1] Unit test for auth middleware in backend/tests/unit/middleware/test_auth_middleware.py (valid token, expired token, missing token)
 
 **Integration Tests (20%)**
 
-- [ ] T032 [US1] Integration test for POST /auth/register endpoint in backend/tests/integration/api/test_auth_register.py (successful registration, duplicate email 409, validation errors 400)
-- [ ] T033 [US1] Integration test for POST /auth/login endpoint in backend/tests/integration/api/test_auth_login.py (valid credentials, invalid credentials, token response structure)
-- [ ] T034 [US1] Integration test for POST /auth/logout endpoint in backend/tests/integration/api/test_auth_logout.py (session termination, cookie clearing)
-- [ ] T035 [US1] Integration test for POST /auth/refresh endpoint in backend/tests/integration/api/test_auth_refresh.py (valid refresh token, expired token)
-- [ ] T036 [US1] Integration test for GET /auth/me endpoint in backend/tests/integration/api/test_auth_me.py (authenticated request, unauthenticated 401)
+- [X] T032 [US1] Integration test for POST /auth/register endpoint in backend/tests/integration/api/test_auth_register.py (successful registration, duplicate email 409, validation errors 400)
+- [X] T033 [US1] Integration test for POST /auth/login endpoint in backend/tests/integration/api/test_auth_login.py (valid credentials, invalid credentials, token response structure)
+- [X] T034 [US1] Integration test for POST /auth/logout endpoint in backend/tests/integration/api/test_auth_logout.py (session termination, cookie clearing)
+- [X] T035 [US1] Integration test for POST /auth/refresh endpoint in backend/tests/integration/api/test_auth_refresh.py (valid refresh token, expired token)
+- [X] T036 [US1] Integration test for GET /auth/me endpoint in backend/tests/integration/api/test_auth_me.py (authenticated request, unauthenticated 401)
 
 **E2E Tests (10%)**
 
@@ -101,30 +101,30 @@ This is a web application with:
 
 **Backend Models**
 
-- [ ] T038 [US1] Create User model in backend/src/models/user.py (id UUID PK, email unique, hashed_password, full_name, role enum, is_active, timestamps)
-- [ ] T039 [US1] Create Alembic migration for User table in backend/alembic/versions/001_create_users_table.py (with indexes on email, role)
+- [X] T038 [US1] Create User model in backend/src/models/user.py (id UUID PK, email unique, hashed_password, full_name, role enum, is_active, timestamps)
+- [X] T039 [US1] Create Alembic migration for User table in backend/alembic/versions/001_create_users_table.py (with indexes on email, role)
 
 **Backend Repositories**
 
-- [ ] T040 [US1] Implement UserRepository in backend/src/repositories/user_repository.py (create_user, get_by_email, get_by_id, email case-insensitive lookup)
+- [X] T040 [US1] Implement UserRepository in backend/src/repositories/user_repository.py (create_user, get_by_email, get_by_id, email case-insensitive lookup)
 
 **Backend Schemas**
 
-- [ ] T041 [P] [US1] Create user request schemas in backend/src/schemas/user_schemas.py (RegisterRequest with email/password/full_name validation, LoginRequest)
-- [ ] T042 [P] [US1] Create user response schemas in backend/src/schemas/user_schemas.py (UserResponse excluding password, TokenResponse with access_token/refresh_token/user)
+- [X] T041 [P] [US1] Create user request schemas in backend/src/schemas/user_schemas.py (RegisterRequest with email/password/full_name validation, LoginRequest)
+- [X] T042 [P] [US1] Create user response schemas in backend/src/schemas/user_schemas.py (UserResponse excluding password, TokenResponse with access_token/refresh_token/user)
 
 **Backend Services**
 
-- [ ] T043 [US1] Implement AuthService in backend/src/services/auth_service.py (register_user with validation and duplicate check, authenticate_user with password verification, create_tokens, revoke_refresh_token)
+- [X] T043 [US1] Implement AuthService in backend/src/services/auth_service.py (register_user with validation and duplicate check, authenticate_user with password verification, create_tokens, revoke_refresh_token)
 
 **Backend API Endpoints**
 
-- [ ] T044 [US1] Implement POST /api/v1/auth/register endpoint in backend/src/api/v1/auth.py (calls AuthService, returns 201 with user data)
-- [ ] T045 [US1] Implement POST /api/v1/auth/login endpoint in backend/src/api/v1/auth.py (calls AuthService, sets HTTP-only refresh cookie, returns access token)
-- [ ] T046 [US1] Implement POST /api/v1/auth/logout endpoint in backend/src/api/v1/auth.py (clears refresh token cookie, returns 204)
-- [ ] T047 [US1] Implement POST /api/v1/auth/refresh endpoint in backend/src/api/v1/auth.py (validates refresh token, issues new access token)
-- [ ] T048 [US1] Implement GET /api/v1/auth/me endpoint in backend/src/api/v1/auth.py (requires auth middleware, returns current user profile)
-- [ ] T049 [US1] Register auth router in backend/src/api/v1/__init__.py
+- [X] T044 [US1] Implement POST /api/v1/auth/register endpoint in backend/src/api/v1/auth.py (calls AuthService, returns 201 with user data)
+- [X] T045 [US1] Implement POST /api/v1/auth/login endpoint in backend/src/api/v1/auth.py (calls AuthService, sets HTTP-only refresh cookie, returns access token)
+- [X] T046 [US1] Implement POST /api/v1/auth/logout endpoint in backend/src/api/v1/auth.py (clears refresh token cookie, returns 204)
+- [X] T047 [US1] Implement POST /api/v1/auth/refresh endpoint in backend/src/api/v1/auth.py (validates refresh token, issues new access token)
+- [X] T048 [US1] Implement GET /api/v1/auth/me endpoint in backend/src/api/v1/auth.py (requires auth middleware, returns current user profile)
+- [X] T049 [US1] Register auth router in backend/src/api/v1/__init__.py
 
 **Frontend Components**
 

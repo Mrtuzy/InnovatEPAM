@@ -1,0 +1,605 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0 -- C:\Yaz²l²m\InnovatEPAM Portal\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Yaz²l²m\InnovatEPAM\backend
+configfile: pyproject.toml
+plugins: anyio-4.12.1, asyncio-1.3.0, cov-7.0.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 69 items
+
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_validToken_returnsUserId ERROR [  1%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_invalidToken_raises401 PASSED [  2%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_expiredToken_raises401 ERROR [  4%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_missingToken_raises401 PASSED [  5%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_tamperedToken_raises401 ERROR [  7%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserPayload_validToken_returnsPayload ERROR [  8%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserPayload_invalidToken_raises401 PASSED [ 10%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserPayload_refreshToken_raises401 PASSED [ 11%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_authMiddleware_hasWWWAuthenticateHeader_returns401WithHeader PASSED [ 13%]
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_tokenWithoutSub_raises401 ERROR [ 14%]
+tests/unit/models/test_user.py::TestUserModel::test_create_validData_createsUserWithHashedPassword FAILED [ 15%]
+tests/unit/models/test_user.py::TestUserModel::test_create_invalidEmail_raisesValidationError FAILED [ 17%]
+tests/unit/models/test_user.py::TestUserModel::test_create_duplicateEmail_raisesIntegrityError PASSED [ 18%]
+tests/unit/models/test_user.py::TestUserModel::test_create_invalidRole_raisesValidationError PASSED [ 20%]
+tests/unit/models/test_user.py::TestUserModel::test_create_validRoles_createsUser PASSED [ 21%]
+tests/unit/models/test_user.py::TestUserModel::test_create_emptyFullName_raisesValidationError PASSED [ 23%]
+tests/unit/models/test_user.py::TestUserModel::test_create_fullNameWithSpecialChars_raisesValidationError PASSED [ 24%]
+tests/unit/models/test_user.py::TestUserModel::test_create_fullNameWithAllowedChars_createsUser PASSED [ 26%]
+tests/unit/models/test_user.py::TestUserModel::test_create_defaultIsActive_isTrue FAILED [ 27%]
+tests/unit/models/test_user.py::TestUserModel::test_repr_validUser_returnsStringRepresentation PASSED [ 28%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_createUser_validData_returnsUser ERROR [ 30%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_createUser_duplicateEmail_raisesIntegrityError ERROR [ 31%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getByEmail_existingUser_returnsUser ERROR [ 33%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getByEmail_nonExistentUser_returnsNone ERROR [ 34%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getByEmail_caseInsensitive_returnsUser ERROR [ 36%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getById_existingUser_returnsUser ERROR [ 37%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getById_nonExistentUser_returnsNone ERROR [ 39%]
+tests/unit/repositories/test_user_repository.py::TestUserRepository::test_createUser_emailStoredLowercase_convertsToLowercase ERROR [ 40%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_validCredentials_returnsUserAndTokens ERROR [ 42%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_incorrectPassword_raisesValueError ERROR [ 43%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_nonExistentEmail_raisesValueError ERROR [ 44%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_genericErrorMessage_doesNotRevealUserExistence ERROR [ 46%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_inactiveUser_raisesValueError ERROR [ 47%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_validCredentials_generatesAccessToken ERROR [ 49%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_validCredentials_generatesRefreshToken ERROR [ 50%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_caseInsensitiveEmail_authenticatesSuccessfully ERROR [ 52%]
+tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_emptyPassword_raisesValueError ERROR [ 53%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validData_returnsUser ERROR [ 55%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_duplicateEmail_raisesValueError ERROR [ 56%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_invalidEmail_raisesValueError ERROR [ 57%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_weakPassword_raisesValueError ERROR [ 59%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validPassword_meetsComplexityRequirements ERROR [ 60%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validData_passwordIsHashed ERROR [ 62%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validData_defaultRoleIsSubmitter ERROR [ 63%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_emptyFullName_raisesValueError ERROR [ 65%]
+tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_emailCaseInsensitive_convertsToLowercase ERROR [ 66%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_validData_returnsToken PASSED [ 68%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_validData_containsCorrectPayload PASSED [ 69%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_validUserId_returnsToken PASSED [ 71%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_validUserId_containsCorrectPayload PASSED [ 72%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_validToken_returnsPayload PASSED [ 73%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_invalidToken_returnsNone PASSED [ 75%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_tamperedToken_returnsNone PASSED [ 76%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyAccessToken_validAccessToken_returnsPayload PASSED [ 78%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyAccessToken_refreshToken_returnsNone PASSED [ 79%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyRefreshToken_validRefreshToken_returnsPayload PASSED [ 81%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyRefreshToken_accessToken_returnsNone PASSED [ 82%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_defaultExpiration_hasCorrectTTL PASSED [ 84%]
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_defaultExpiration_hasCorrectTTL PASSED [ 85%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_hashPassword_validPassword_returnsHashedString PASSED [ 86%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_hashPassword_samePasswordTwice_returnsDifferentHashes PASSED [ 88%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_hashPassword_emptyPassword_raisesError PASSED [ 89%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_verifyPassword_correctPassword_returnsTrue PASSED [ 91%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_verifyPassword_incorrectPassword_returnsFalse PASSED [ 92%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_verifyPassword_emptyPassword_returnsFalse PASSED [ 94%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_verifyPassword_invalidHash_returnsFalse PASSED [ 95%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_verifyPassword_modifiedHash_returnsFalse PASSED [ 97%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_hashPassword_unicodeCharacters_hashesSuccessfully PASSED [ 98%]
+tests/unit/utils/test_password_hasher.py::TestPasswordHasher::test_hashPassword_longPassword_hashesSuccessfully PASSED [100%]
+ERROR: Coverage failure: total of 53 is less than fail-under=80
+
+
+=================================== ERRORS ====================================
+_ ERROR at setup of TestAuthMiddleware.test_getCurrentUserId_validToken_returnsUserId _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 40
+      def test_getCurrentUserId_validToken_returnsUserId(self, valid_access_token):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 24
+      @pytest.fixture
+      def valid_access_token(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, expired_token, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, valid_access_token
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py:24
+_ ERROR at setup of TestAuthMiddleware.test_getCurrentUserId_expiredToken_raises401 _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 73
+      def test_getCurrentUserId_expiredToken_raises401(self, expired_token):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 31
+      @pytest.fixture
+      def expired_token(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, expired_token, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, valid_access_token
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py:31
+_ ERROR at setup of TestAuthMiddleware.test_getCurrentUserId_tamperedToken_raises401 _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 101
+      def test_getCurrentUserId_tamperedToken_raises401(self, valid_access_token):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 24
+      @pytest.fixture
+      def valid_access_token(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, expired_token, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, valid_access_token
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py:24
+_ ERROR at setup of TestAuthMiddleware.test_getCurrentUserPayload_validToken_returnsPayload _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 116
+      def test_getCurrentUserPayload_validToken_returnsPayload(self, valid_access_token):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 24
+      @pytest.fixture
+      def valid_access_token(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, expired_token, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, valid_access_token
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py:24
+_ ERROR at setup of TestAuthMiddleware.test_getCurrentUserId_tokenWithoutSub_raises401 _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py, line 184
+      def test_getCurrentUserId_tokenWithoutSub_raises401(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, expired_token, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, valid_access_token
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\middleware\test_auth_middleware.py:184
+_ ERROR at setup of TestUserRepository.test_createUser_validData_returnsUser __
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 33
+      def test_createUser_validData_returnsUser(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_createUser_duplicateEmail_raisesIntegrityError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 67
+      def test_createUser_duplicateEmail_raisesIntegrityError(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_getByEmail_existingUser_returnsUser _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 87
+      def test_getByEmail_existingUser_returnsUser(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_getByEmail_nonExistentUser_returnsNone _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 109
+      def test_getByEmail_nonExistentUser_returnsNone(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_getByEmail_caseInsensitive_returnsUser _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 124
+      def test_getByEmail_caseInsensitive_returnsUser(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_getById_existingUser_returnsUser __
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 147
+      def test_getById_existingUser_returnsUser(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_getById_nonExistentUser_returnsNone _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 170
+      def test_getById_nonExistentUser_returnsNone(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestUserRepository.test_createUser_emailStoredLowercase_convertsToLowercase _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 185
+      def test_createUser_emailStoredLowercase_convertsToLowercase(self, user_repository, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 28
+      @pytest.fixture
+      def user_repository(self, mock_db_session):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py, line 23
+      @pytest.fixture
+      def mock_db_session(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_db_session, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory, user_repository
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\repositories\test_user_repository.py:23
+_ ERROR at setup of TestAuthServiceLogin.test_login_validCredentials_returnsUserAndTokens _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 38
+      def test_login_validCredentials_returnsUserAndTokens(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_incorrectPassword_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 67
+      def test_login_incorrectPassword_raisesValueError(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_nonExistentEmail_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 86
+      def test_login_nonExistentEmail_raisesValueError(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_genericErrorMessage_doesNotRevealUserExistence _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 100
+      def test_login_genericErrorMessage_doesNotRevealUserExistence(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_inactiveUser_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 120
+      def test_login_inactiveUser_raisesValueError(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_validCredentials_generatesAccessToken _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 137
+      def test_login_validCredentials_generatesAccessToken(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_validCredentials_generatesRefreshToken _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 160
+      def test_login_validCredentials_generatesRefreshToken(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_caseInsensitiveEmail_authenticatesSuccessfully _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 183
+      def test_login_caseInsensitiveEmail_authenticatesSuccessfully(
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceLogin.test_login_emptyPassword_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 207
+      def test_login_emptyPassword_raisesValueError(self, auth_service):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_password_hasher, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_login.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_validData_returnsUser _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 33
+      def test_register_validData_returnsUser(self, auth_service, mock_user_repository):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_duplicateEmail_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 59
+      def test_register_duplicateEmail_raisesValueError(self, auth_service, mock_user_repository):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_invalidEmail_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 76
+      def test_register_invalidEmail_raisesValueError(self, auth_service):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_weakPassword_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 95
+      def test_register_weakPassword_raisesValueError(self, auth_service):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_validPassword_meetsComplexityRequirements _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 116
+      def test_register_validPassword_meetsComplexityRequirements(self, auth_service, mock_user_repository):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_validData_passwordIsHashed _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 138
+      def test_register_validData_passwordIsHashed(self, auth_service, mock_user_repository):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_validData_defaultRoleIsSubmitter _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 156
+      def test_register_validData_defaultRoleIsSubmitter(self, auth_service, mock_user_repository):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_emptyFullName_raisesValueError _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 171
+      def test_register_emptyFullName_raisesValueError(self, auth_service):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+_ ERROR at setup of TestAuthServiceRegister.test_register_emailCaseInsensitive_convertsToLowercase _
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 185
+      def test_register_emailCaseInsensitive_convertsToLowercase(self, auth_service, mock_user_repository):
+file C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py, line 22
+      @pytest.fixture
+      def auth_service(self, mocker):
+E       fixture 'mocker' not found
+>       available fixtures: _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, auth_service, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, cov, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_user_repository, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, subtests, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Yaz²l²m\InnovatEPAM\backend\tests\unit\services\test_auth_service_register.py:22
+================================== FAILURES ===================================
+______ TestUserModel.test_create_validData_createsUserWithHashedPassword ______
+tests\unit\models\test_user.py:43: in test_create_validData_createsUserWithHashedPassword
+    assert user.is_active is True  # Default value
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   assert None is True
+E    +  where None = User(id=None, email=test@example.com, role=UserRole.SUBMITTER).is_active
+________ TestUserModel.test_create_invalidEmail_raisesValidationError _________
+tests\unit\models\test_user.py:60: in test_create_invalidEmail_raisesValidationError
+    with pytest.raises(ValueError, match="email"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE <class 'ValueError'>
+______________ TestUserModel.test_create_defaultIsActive_isTrue _______________
+tests\unit\models\test_user.py:171: in test_create_defaultIsActive_isTrue
+    assert user.is_active is True
+E   assert None is True
+E    +  where None = User(id=None, email=test@example.com, role=UserRole.SUBMITTER).is_active
+============================== warnings summary ===============================
+src\config\database.py:24
+  C:\Yaz²l²m\InnovatEPAM\backend\src\config\database.py:24: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+..\..\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319
+..\..\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319
+..\..\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319
+..\..\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319
+..\..\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319
+..\..\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319
+  C:\Yaz²l²m\InnovatEPAM Portal\.venv\Lib\site-packages\pydantic\_internal\_generate_schema.py:319: PydanticDeprecatedSince20: `json_encoders` is deprecated. See https://docs.pydantic.dev/2.12/concepts/serialization/#custom-serializers for alternatives. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    warnings.warn(
+
+src\schemas\user_schemas.py:10
+  C:\Yaz²l²m\InnovatEPAM\backend\src\schemas\user_schemas.py:10: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class RegisterRequest(PydanticBase):
+
+src\schemas\user_schemas.py:30
+  C:\Yaz²l²m\InnovatEPAM\backend\src\schemas\user_schemas.py:30: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class LoginRequest(PydanticBase):
+
+src\schemas\user_schemas.py:44
+  C:\Yaz²l²m\InnovatEPAM\backend\src\schemas\user_schemas.py:44: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class UserResponse(BaseSchema):
+
+src\schemas\user_schemas.py:69
+  C:\Yaz²l²m\InnovatEPAM\backend\src\schemas\user_schemas.py:69: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class TokenResponse(PydanticBase):
+
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserPayload_refreshToken_raises401
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_validUserId_returnsToken
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_validUserId_containsCorrectPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyAccessToken_refreshToken_returnsNone
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyRefreshToken_validRefreshToken_returnsPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_defaultExpiration_hasCorrectTTL
+  C:\Yaz²l²m\InnovatEPAM\backend\src\utils\jwt_handler.py:61: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    expire = datetime.utcnow() + timedelta(
+
+tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserPayload_refreshToken_raises401
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_validUserId_returnsToken
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_validUserId_containsCorrectPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyAccessToken_refreshToken_returnsNone
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyRefreshToken_validRefreshToken_returnsPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createRefreshToken_defaultExpiration_hasCorrectTTL
+  C:\Yaz²l²m\InnovatEPAM\backend\src\utils\jwt_handler.py:67: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "iat": datetime.utcnow(),
+
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_validData_returnsToken
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_validData_containsCorrectPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_validToken_returnsPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_tamperedToken_returnsNone
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyAccessToken_validAccessToken_returnsPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyRefreshToken_accessToken_returnsNone
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_defaultExpiration_hasCorrectTTL
+  C:\Yaz²l²m\InnovatEPAM\backend\src\utils\jwt_handler.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    expire = datetime.utcnow() + timedelta(
+
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_validData_returnsToken
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_validData_containsCorrectPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_validToken_returnsPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_decodeToken_tamperedToken_returnsNone
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyAccessToken_validAccessToken_returnsPayload
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_verifyRefreshToken_accessToken_returnsNone
+tests/unit/utils/test_jwt_handler.py::TestJWTHandler::test_createAccessToken_defaultExpiration_hasCorrectTTL
+  C:\Yaz²l²m\InnovatEPAM\backend\src\utils\jwt_handler.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "iat": datetime.utcnow(),
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.3-final-0 _______________
+
+Name                                    Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------
+src\__init__.py                             0      0   100%
+src\api\__init__.py                         0      0   100%
+src\api\middleware\__init__.py              0      0   100%
+src\api\middleware\auth_middleware.py      24      5    79%   41-49, 77
+src\api\middleware\error_handler.py        19     19     0%   2-70
+src\api\middleware\rbac_middleware.py      19     19     0%   2-79
+src\api\v1\__init__.py                      2      2     0%   2-4
+src\api\v1\auth.py                         62     62     0%   2-278
+src\api\v1\router.py                        7      7     0%   2-15
+src\config\__init__.py                      0      0   100%
+src\config\database.py                     14      4    71%   35-39
+src\config\settings.py                     24      0   100%
+src\main.py                                18     18     0%   2-52
+src\models\__init__.py                      0      0   100%
+src\models\base.py                         10      0   100%
+src\models\user.py                         48      2    96%   75, 138
+src\repositories\__init__.py                0      0   100%
+src\repositories\base_repository.py        35     22    37%   33-34, 46-50, 62, 81, 94-100, 112-117
+src\repositories\user_repository.py        27     15    44%   27, 52-65, 81-82, 96, 110-111
+src\schemas\__init__.py                     0      0   100%
+src\schemas\base_schemas.py                13      0   100%
+src\schemas\user_schemas.py                28      0   100%
+src\services\__init__.py                    0      0   100%
+src\services\auth_service.py               78     61    22%   31-32, 55-97, 118-153, 173-201, 217-219, 239-249
+src\utils\__init__.py                       0      0   100%
+src\utils\jwt_handler.py                   37      0   100%
+src\utils\logger.py                        37     13    65%   27, 52-65, 69-70, 74-75, 79-80, 84-85
+src\utils\password_hasher.py               25      0   100%
+---------------------------------------------------------------------
+TOTAL                                     527    249    53%
+Coverage HTML written to dir htmlcov
+FAIL Required test coverage of 80% not reached. Total coverage: 52.75%
+=========================== short test summary info ===========================
+FAILED tests/unit/models/test_user.py::TestUserModel::test_create_validData_createsUserWithHashedPassword - assert None is True
+ +  where None = User(id=None, email=test@example.com, role=UserRole.SUBMITTER).is_active
+FAILED tests/unit/models/test_user.py::TestUserModel::test_create_invalidEmail_raisesValidationError - Failed: DID NOT RAISE <class 'ValueError'>
+FAILED tests/unit/models/test_user.py::TestUserModel::test_create_defaultIsActive_isTrue - assert None is True
+ +  where None = User(id=None, email=test@example.com, role=UserRole.SUBMITTER).is_active
+ERROR tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_validToken_returnsUserId
+ERROR tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_expiredToken_raises401
+ERROR tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_tamperedToken_raises401
+ERROR tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserPayload_validToken_returnsPayload
+ERROR tests/unit/middleware/test_auth_middleware.py::TestAuthMiddleware::test_getCurrentUserId_tokenWithoutSub_raises401
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_createUser_validData_returnsUser
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_createUser_duplicateEmail_raisesIntegrityError
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getByEmail_existingUser_returnsUser
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getByEmail_nonExistentUser_returnsNone
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getByEmail_caseInsensitive_returnsUser
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getById_existingUser_returnsUser
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_getById_nonExistentUser_returnsNone
+ERROR tests/unit/repositories/test_user_repository.py::TestUserRepository::test_createUser_emailStoredLowercase_convertsToLowercase
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_validCredentials_returnsUserAndTokens
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_incorrectPassword_raisesValueError
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_nonExistentEmail_raisesValueError
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_genericErrorMessage_doesNotRevealUserExistence
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_inactiveUser_raisesValueError
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_validCredentials_generatesAccessToken
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_validCredentials_generatesRefreshToken
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_caseInsensitiveEmail_authenticatesSuccessfully
+ERROR tests/unit/services/test_auth_service_login.py::TestAuthServiceLogin::test_login_emptyPassword_raisesValueError
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validData_returnsUser
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_duplicateEmail_raisesValueError
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_invalidEmail_raisesValueError
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_weakPassword_raisesValueError
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validPassword_meetsComplexityRequirements
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validData_passwordIsHashed
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_validData_defaultRoleIsSubmitter
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_emptyFullName_raisesValueError
+ERROR tests/unit/services/test_auth_service_register.py::TestAuthServiceRegister::test_register_emailCaseInsensitive_convertsToLowercase
+============ 3 failed, 35 passed, 37 warnings, 31 errors in 5.05s =============

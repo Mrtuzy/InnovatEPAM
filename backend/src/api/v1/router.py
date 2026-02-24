@@ -4,10 +4,9 @@ from fastapi import APIRouter
 # Create main API router
 api_router = APIRouter()
 
-# Import and register routers here when created
-# Example:
-# from src.api.v1.auth import router as auth_router
-# api_router.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+# Import and register routers
+from src.api.v1.auth import router as auth_router
+api_router.include_router(auth_router)
 
 
 @api_router.get("/")

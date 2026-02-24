@@ -4,12 +4,15 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/routing/ProtectedRoute';
 
-// Placeholder components - will be created in user story implementations
+// Auth Pages
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
+
+// Placeholder components
 const HomePage: React.FC = () => <div>Home Page</div>;
-const LoginPage: React.FC = () => <div>Login Page (To be implemented)</div>;
-const RegisterPage: React.FC = () => <div>Register Page (To be implemented)</div>;
-const DashboardPage: React.FC = () => <div>Dashboard (To be implemented)</div>;
 
 const AppRoutes: React.FC = () => {
   return (
@@ -21,8 +24,15 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
-          {/* Protected routes - will add ProtectedRoute wrapper in US1 */}
-          <Route path="/dashboard" element={<DashboardPage />} />
+          {/* Protected routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Catch-all redirect */}
           <Route path="*" element={<Navigate to="/" replace />} />

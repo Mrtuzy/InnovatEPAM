@@ -6,7 +6,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from src.utils.jwt_handler import jwt_handler
 
 
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)
 
 
 class AuthMiddleware:
@@ -14,7 +14,7 @@ class AuthMiddleware:
     
     @staticmethod
     def get_current_user_id(
-        credentials: HTTPAuthorizationCredentials
+        credentials: Optional[HTTPAuthorizationCredentials] = None
     ) -> str:
         """
         Extract and validate user from JWT token.
@@ -28,6 +28,13 @@ class AuthMiddleware:
         Raises:
             HTTPException: If token invalid or expired
         """
+        if not credentials:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Missing authentication credentials",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        
         token = credentials.credentials
         payload = jwt_handler.verify_access_token(token)
         
@@ -50,7 +57,7 @@ class AuthMiddleware:
     
     @staticmethod
     def get_current_user_payload(
-        credentials: HTTPAuthorizationCredentials
+        credentials: Optional[HTTPAuthorizationCredentials] = None
     ) -> dict:
         """
         Get full user payload from token.
@@ -64,6 +71,13 @@ class AuthMiddleware:
         Raises:
             HTTPException: If token invalid
         """
+        if not credentials:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Missing authentication credentials",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        
         token = credentials.credentials
         payload = jwt_handler.verify_access_token(token)
         
