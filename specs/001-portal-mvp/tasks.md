@@ -27,15 +27,15 @@ This is a web application with:
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create backend project structure with src/ and tests/ directories per plan.md
-- [ ] T002 Initialize Python project with pyproject.toml, configure Poetry/pip with FastAPI 0.104+, SQLAlchemy 2.0+, Pydantic 2.0+, pytest, bcrypt
-- [ ] T003 [P] Initialize frontend project with Vite 5+, React 18+, configure package.json with TypeScript, Vitest, Playwright
-- [ ] T004 [P] Configure linting (Ruff/pylint for backend, ESLint for frontend) and formatting (Black for backend, Prettier for frontend)
-- [ ] T005 Setup PostgreSQL 14+ connection in backend/src/config/settings.py with environment variable support
-- [ ] T006 Create database initialization script with Alembic for migrations in backend/alembic/
-- [ ] T007 Configure pytest with coverage settings in backend/pyproject.toml targeting 80% minimum for auth and ideas modules
-- [ ] T008 [P] Configure Vitest for frontend unit tests in frontend/vitest.config.ts
-- [ ] T009 [P] Configure Playwright for e2e tests in frontend/playwright.config.ts
+- [X] T001 Create backend project structure with src/ and tests/ directories per plan.md
+- [X] T002 Initialize Python project with pyproject.toml, configure Poetry/pip with FastAPI 0.104+, SQLAlchemy 2.0+, Pydantic 2.0+, pytest, bcrypt
+- [X] T003 [P] Initialize frontend project with Vite 5+, React 18+, configure package.json with TypeScript, Vitest, Playwright
+- [X] T004 [P] Configure linting (Ruff/pylint for backend, ESLint for frontend) and formatting (Black for backend, Prettier for frontend)
+- [X] T005 Setup PostgreSQL 14+ connection in backend/src/config/settings.py with environment variable support
+- [X] T006 Create database initialization script with Alembic for migrations in backend/alembic/
+- [X] T007 Configure pytest with coverage settings in backend/pyproject.toml targeting 80% minimum for auth and ideas modules
+- [X] T008 [P] Configure Vitest for frontend unit tests in frontend/vitest.config.ts
+- [X] T009 [P] Configure Playwright for e2e tests in frontend/playwright.config.ts
 
 **Checkpoint**: Project structure initialized, dependencies installed, test frameworks configured
 
@@ -47,21 +47,21 @@ This is a web application with:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T010 Create base database models in backend/src/models/base.py with UUID primary key, created_at, updated_at fields
-- [ ] T011 Setup database session management in backend/src/config/database.py with connection pooling
-- [ ] T012 Create base repository pattern in backend/src/repositories/base_repository.py with CRUD operations
-- [ ] T013 Implement password hasher utility in backend/src/utils/password_hasher.py using bcrypt with 12 rounds
-- [ ] T014 Create JWT token utility in backend/src/utils/jwt_handler.py with token generation/validation (15-minute access, 7-day refresh)
-- [ ] T015 Implement authentication middleware in backend/src/api/middleware/auth_middleware.py for JWT validation
-- [ ] T016 Implement RBAC middleware in backend/src/api/middleware/rbac_middleware.py for role checking (submitter/admin)
-- [ ] T017 Create Pydantic base schemas in backend/src/schemas/base_schemas.py with common response models
-- [ ] T018 Setup error handling middleware in backend/src/api/middleware/error_handler.py with standardized error responses
-- [ ] T019 Configure logging in backend/src/utils/logger.py with structured logging (no sensitive data)
-- [ ] T020 Create FastAPI application entry point in backend/src/main.py with CORS, middleware registration, API router mounting
-- [ ] T021 Create API v1 router structure in backend/src/api/v1/__init__.py
-- [ ] T022 [P] Setup frontend API client in frontend/src/api/client.ts with axios, authentication header injection, error handling
-- [ ] T023 [P] Create frontend routing structure in frontend/src/routes.tsx with React Router
-- [ ] T024 [P] Create authentication context in frontend/src/contexts/AuthContext.tsx for user state management
+- [X] T010 Create base database models in backend/src/models/base.py with UUID primary key, created_at, updated_at fields
+- [X] T011 Setup database session management in backend/src/config/database.py with connection pooling
+- [X] T012 Create base repository pattern in backend/src/repositories/base_repository.py with CRUD operations
+- [X] T013 Implement password hasher utility in backend/src/utils/password_hasher.py using bcrypt with 12 rounds
+- [X] T014 Create JWT token utility in backend/src/utils/jwt_handler.py with token generation/validation (15-minute access, 7-day refresh)
+- [X] T015 Implement authentication middleware in backend/src/api/middleware/auth_middleware.py for JWT validation
+- [X] T016 Implement RBAC middleware in backend/src/api/middleware/rbac_middleware.py for role checking (submitter/admin)
+- [X] T017 Create Pydantic base schemas in backend/src/schemas/base_schemas.py with common response models
+- [X] T018 Setup error handling middleware in backend/src/api/middleware/error_handler.py with standardized error responses
+- [X] T019 Configure logging in backend/src/utils/logger.py with structured logging (no sensitive data)
+- [X] T020 Create FastAPI application entry point in backend/src/main.py with CORS, middleware registration, API router mounting
+- [X] T021 Create API v1 router structure in backend/src/api/v1/__init__.py
+- [X] T022 [P] Setup frontend API client in frontend/src/api/client.ts with axios, authentication header injection, error handling
+- [X] T023 [P] Create frontend routing structure in frontend/src/routes.tsx with React Router
+- [X] T024 [P] Create authentication context in frontend/src/contexts/AuthContext.tsx for user state management
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
