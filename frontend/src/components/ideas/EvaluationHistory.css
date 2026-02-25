@@ -1,0 +1,178 @@
+/* Evaluation History Styles */
+
+.evaluation-history {
+  margin-top: 2rem;
+}
+
+.evaluation-history-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.evaluation-loading,
+.evaluation-error,
+.evaluation-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+  font-size: 0.9375rem;
+}
+
+.evaluation-error {
+  color: #c53030;
+  background-color: #fed7d7;
+  border-radius: 8px;
+}
+
+.evaluation-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.evaluation-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+.evaluation-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.evaluation-marker {
+  position: absolute;
+  left: -2rem;
+  top: 0.25rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: #4299e1;
+  border-radius: 50%;
+  border: 3px solid #ebf8ff;
+  z-index: 2;
+}
+
+.evaluation-line {
+  position: absolute;
+  left: -1.5rem;
+  top: 1.25rem;
+  bottom: -2rem;
+  width: 2px;
+  background-color: #e2e8f0;
+  z-index: 1;
+}
+
+.evaluation-content {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+.evaluation-header {
+  margin-bottom: 1rem;
+}
+
+.evaluation-status-change {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-submitted {
+  background-color: #bee3f8;
+  color: #2c5282;
+}
+
+.status-under-review {
+  background-color: #feebc8;
+  color: #7c2d12;
+}
+
+.status-accepted {
+  background-color: #c6f6d5;
+  color: #22543d;
+}
+
+.status-rejected {
+  background-color: #fed7d7;
+  color: #742a2a;
+}
+
+.status-arrow {
+  color: #718096;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.evaluation-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: #718096;
+}
+
+.evaluation-evaluator {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.evaluation-date {
+  color: #718096;
+}
+
+.evaluation-comment {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 4px solid #4299e1;
+}
+
+.evaluation-comment p {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .evaluation-timeline {
+    padding-left: 1.5rem;
+  }
+
+  .evaluation-marker {
+    left: -1.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .evaluation-line {
+    left: -1.125rem;
+  }
+
+  .evaluation-content {
+    padding: 1rem;
+  }
+
+  .evaluation-status-change {
+    flex-wrap: wrap;
+  }
+}

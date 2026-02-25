@@ -4,7 +4,7 @@
  */
 import React, { useState } from 'react';
 import apiClient from '../../api/client';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 interface RegistrationFormProps {
@@ -109,10 +109,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess }) => {
   return (
     <div className="registration-form">
       <h1>Create Account</h1>
-      
+      <p>Start sharing ideas in minutes. Your role is set automatically.</p>
+
       {generalError && <div className="error-message">{generalError}</div>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="stagger">
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -158,13 +159,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess }) => {
           {errors.password && <span className="field-error">{errors.password}</span>}
         </div>
 
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" className="primary-button" disabled={isLoading}>
           {isLoading ? 'Creating Account...' : 'Register'}
         </button>
       </form>
 
-      <p className="signup-link">
-        Already have an account? <a href="/login">Sign In</a>
+      <p className="auth-footer">
+        Already have an account? <Link to="/login" className="inline-link">Sign In</Link>
       </p>
     </div>
   );

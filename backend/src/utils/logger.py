@@ -80,13 +80,28 @@ class StructuredLogger:
         self.logger.warning(f"{message} {sanitized}" if sanitized else message)
     
     def error(self, message: str, exc_info: bool = False, **kwargs) -> None:
-        """Log error message."""
+        """Log error message with optional exception info."""
         sanitized = self._sanitize(kwargs)
-        self.logger.error(
-            f"{message} {sanitized}" if sanitized else message,
-            exc_info=exc_info
-        )
+        if exc_info:
+            self.logger.error(f"{message} {sanitized}" if sanitized else message, exc_info=True)
+        else:
+            self.logger.error(f"{message} {sanitized}" if sanitized else message)
 
 
 # Singleton instance
 logger = StructuredLogger()
+
+
+def get_logger(name: str = "innovatepam") -> StructuredLogger:
+    """
+    Get logger instance.
+    
+    Args:
+        name: Logger name
+        
+    Returns:
+        StructuredLogger instance
+    """
+    if name == "innovatepam" or name == "__main__":
+        return logger
+    return StructuredLogger(name)

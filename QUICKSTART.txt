@@ -1,0 +1,75 @@
+═══════════════════════════════════════════════════════════
+  InnovatEPAM Portal - Quick Start
+═══════════════════════════════════════════════════════════
+
+🚀 TEK TIKLA BAŞLAT
+───────────────────────────────────────────────────────────
+Çift tıklayın:  start.bat
+
+Her iki sunucu da otomatik başlayacak!
+
+✅ Frontend:  http://localhost:3000
+✅ Backend:   http://localhost:8000  
+📚 API Docs:  http://localhost:8000/docs
+
+
+📋 İLK KURULUM (İsteğe Bağlı)
+───────────────────────────────────────────────────────────
+İlk çalıştırmada bir kere yapın:
+
+1. Virtual environment oluşturun:
+   python -m venv .venv
+
+2. Kurulumu çalıştırın:
+   setup.bat
+
+Bu işlem:
+- Backend bağımlılıklarını yükler
+- Frontend bağımlılıklarını yükler  
+- .env dosyalarını oluşturur
+- Veritabanını hazırlar
+
+
+🎯 DİĞER KOMUTLAR
+───────────────────────────────────────────────────────────
+start-backend-simple.bat   → Sadece Backend
+start-frontend-simple.bat  → Sadece Frontend
+test.bat                   → Testleri çalıştır
+
+
+📝 MANUEL BAŞLATMA
+───────────────────────────────────────────────────────────
+İki ayrı terminal açın:
+
+Terminal 1 (Backend):
+  cd backend
+  .venv\Scripts\activate
+  uvicorn src.main:app --reload
+
+Terminal 2 (Frontend):
+  cd frontend
+  npm run dev
+
+
+❓ SORUN ÇÖZME
+───────────────────────────────────────────────────────────
+• "Virtual environment not found" hatası:
+  → python -m venv .venv
+
+• "Module not found" hatası:
+  → cd backend
+  → .venv\Scripts\activate
+  → pip install -r requirements.txt
+
+• "npm install" gerekli:
+  → cd frontend
+  → npm install
+
+• Port zaten kullanımda:
+  → Backend için: --port 8001
+  → Frontend için: vite.config.ts dosyasını düzenleyin
+
+
+═══════════════════════════════════════════════════════════
+Daha fazla bilgi için: README.md
+═══════════════════════════════════════════════════════════

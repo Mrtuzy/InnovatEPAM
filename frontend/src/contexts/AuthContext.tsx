@@ -2,6 +2,7 @@
  * Authentication context for managing user state.
  */
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import apiClient from '../api/client';
 
 interface User {
   id: string;
@@ -27,20 +28,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Check for existing authentication on mount
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       const token = localStorage.getItem('access_token');
-      const storedUser = localStorage.getItem('user');
 
-      if (token && storedUser) {
-        try {
-          setUser(JSON.parse(storedUser));
-        } catch (error) {
-          console.error('Failed to parse stored user:', error);
-          localStorage.removeItem('user');
-        }
+      if (!token) {
+        localStorage.removeItem('user');
+        setIsLoading(false);
+        return;
       }
 
-      setIsLoading(false);
+      try {
+        const response = await apiClient.get('/api/v1/auth/me');
+        setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+      } catch (error) {
+        console.error('Failed to verify session:', error);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user');
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     checkAuth();

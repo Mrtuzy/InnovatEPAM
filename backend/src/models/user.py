@@ -1,8 +1,11 @@
 """User model for authentication and profile management."""
 from sqlalchemy import Column, String, Boolean, Enum as SQLEnum
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 import enum
 import re
+import uuid
+from datetime import datetime
 
 from src.models.base import BaseModel
 from src.utils.password_hasher import password_hasher
@@ -31,8 +34,17 @@ class User(BaseModel):
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
-    role = Column(SQLEnum(UserRole), nullable=False, default=UserRole.SUBMITTER)
+    # Use values_callable to store enum VALUES (submitter/admin) not NAMES (SUBMITTER/ADMIN)
+    role = Column(
+        SQLEnum(UserRole, values_callable=lambda x: [e.value for e in x], name='user_role'),
+        nullable=False,
+        default='submitter'
+    )
     is_active = Column(Boolean, nullable=False, default=True, index=True)
+    
+    # Relationship to ideas (one user has many ideas)
+    ideas = relationship("Idea", back_populates="submitter")
+    evaluations = relationship("Evaluation", back_populates="evaluator")
     
     def __init__(
         self,
@@ -50,7 +62,7 @@ class User(BaseModel):
             email: Email address (will be converted to lowercase)
             hashed_password: Password to hash or already hashed password
             full_name: Full name
-            role: User role (submitter/admin)
+            role: User role as string value (submitter/admin)
             is_active: Account active status (default True)
             
         Raises:
@@ -67,11 +79,12 @@ class User(BaseModel):
                 f"Invalid full_name: Must be 2+ characters, letters/spaces/hyphens/apostrophes only"
             )
         
-        # Validate role
-        if role not in [r.value for r in UserRole]:
-            raise ValueError(f"Invalid role: {role}")
+        # Validate role is a valid enum value
+        valid_roles = [r.value for r in UserRole]
+        if role not in valid_roles:
+            raise ValueError(f"Invalid role: {role}. Must be one of {valid_roles}")
         
-        # Hash password if not already hashed (starts with $2b$ indicates bcrypt)
+        # Hash password if not already hashed (bcrypt format: $2b$)
         if not hashed_password.startswith("$2b$"):
             if not self._validate_password(hashed_password):
                 raise ValueError(
@@ -79,24 +92,28 @@ class User(BaseModel):
                 )
             hashed_password = password_hasher.hash_password(hashed_password)
         
-        # Set attributes directly (SQLAlchemy style)
+        # Set attributes (store role as string value for PostgreSQL enum)
         self.email = email
         self.hashed_password = hashed_password
         self.full_name = full_name
-        self.role = UserRole(role)
+        self.role = role  # Store string value directly, not enum member
         self.is_active = is_active
         
-        # Generate UUID if not provided
-        if 'id' not in kwargs and self.id is None:
-            import uuid as uuid_module
-            self.id = uuid_module.uuid4()
+        # Generate UUID from kwargs or create new one
+        if 'id' in kwargs:
+            self.id = kwargs['id']
+        elif self.id is None:
+            self.id = uuid.uuid4()
         
-        # Set timestamps if not provided
-        if self.created_at is None:
-            from datetime import datetime
+        # Set timestamps from kwargs or current time
+        if 'created_at' in kwargs:
+            self.created_at = kwargs['created_at']
+        elif self.created_at is None:
             self.created_at = datetime.utcnow()
-        if self.updated_at is None:
-            from datetime import datetime
+        
+        if 'updated_at' in kwargs:
+            self.updated_at = kwargs['updated_at']
+        elif self.updated_at is None:
             self.updated_at = datetime.utcnow()
     
     @staticmethod

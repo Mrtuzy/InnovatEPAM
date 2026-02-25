@@ -1,0 +1,256 @@
+/* Ideas List Page Styles */
+
+.ideas-list-page {
+  min-height: 100vh;
+  background-color: #f7fafc;
+  padding: 2rem 1rem;
+}
+
+.ideas-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ideas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.btn-back {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: #4299e1;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-back:hover {
+  background-color: #ebf8ff;
+  border-color: #4299e1;
+}
+
+.ideas-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.ideas-subtitle {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0;
+}
+
+.btn-submit-idea {
+  padding: 0.75rem 1.5rem;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-submit-idea:hover {
+  background-color: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: #c6f6d5;
+  color: #22543d;
+  border: 1px solid #9ae6b4;
+}
+
+.alert-error {
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #fc8181;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #718096;
+  font-size: 1.125rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #718096;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.idea-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.idea-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #4299e1;
+}
+
+.idea-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-submitted {
+  background-color: #bee3f8;
+  color: #2c5282;
+}
+
+.status-under-review {
+  background-color: #feebc8;
+  color: #7c2d12;
+}
+
+.status-accepted {
+  background-color: #c6f6d5;
+  color: #22543d;
+}
+
+.status-rejected {
+  background-color: #fed7d7;
+  color: #742a2a;
+}
+
+.idea-date {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.idea-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.idea-card-description {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.idea-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.idea-category {
+  font-size: 0.875rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+.idea-attachment {
+  font-size: 0.875rem;
+  color: #4299e1;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .ideas-list-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .ideas-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-submit-idea {
+    width: 100%;
+  }
+
+  .ideas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ideas-title {
+    font-size: 1.5rem;
+  }
+}

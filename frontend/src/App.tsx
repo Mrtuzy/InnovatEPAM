@@ -3,7 +3,11 @@ import AppRoutes from './routes';
 import './App.css';
 
 const App: React.FC = () => {
-  return <AppRoutes />;
+  return (
+    <div className="app-shell">
+      <AppRoutes />
+    </div>
+  );
 };
 
 export default App;

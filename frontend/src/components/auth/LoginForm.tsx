@@ -4,7 +4,7 @@
  */
 import React, { useState } from 'react';
 import apiClient from '../../api/client';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 interface LoginFormProps {
@@ -90,11 +90,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
   return (
     <div className="login-form">
-      <h1>Sign In</h1>
-      
+      <h1>Welcome Back</h1>
+      <p>Pick up where you left off in the innovation pipeline.</p>
+
       {generalError && <div className="error-message">{generalError}</div>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="stagger">
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -125,13 +126,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           {errors.password && <span className="field-error">{errors.password}</span>}
         </div>
 
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" className="primary-button" disabled={isLoading}>
           {isLoading ? 'Signing In...' : 'Sign In'}
         </button>
       </form>
 
-      <p className="signup-link">
-        Don't have an account? <a href="/register">Create one</a>
+      <p className="auth-footer">
+        Don't have an account? <Link to="/register" className="inline-link">Create one</Link>
       </p>
     </div>
   );

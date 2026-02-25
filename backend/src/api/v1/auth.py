@@ -4,18 +4,22 @@ from fastapi.responses import JSONResponse, Response
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Optional
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from src.config.database import get_db
 from src.api.middleware.auth_middleware import auth_middleware
 from src.services.auth_service import AuthService
+from src.repositories.user_repository import UserRepository
 from src.utils.jwt_handler import jwt_handler
 from src.schemas.user_schemas import (
     RegisterRequest,
     LoginRequest,
+    RefreshTokenRequest,
     UserResponse,
     TokenResponse
 )
 from src.schemas.base_schemas import ErrorResponse
+from src.utils.logger import logger
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 security = HTTPBearer(auto_error=False)
@@ -57,12 +61,11 @@ async def register(
             full_name=request.full_name
         )
         
-        # Generate tokens
-        from src.utils.jwt_handler import jwt_handler
+        # Generate tokens (user.role is already string value)
         access_token = jwt_handler.create_access_token(
             user_id=user.id,
             email=user.email,
-            role=user.role.value
+            role=user.role  # Already a string, not enum member
         )
         refresh_token = jwt_handler.create_refresh_token(user_id=user.id)
         
@@ -78,19 +81,22 @@ async def register(
         error_msg = str(e)
         
         # Check for duplicate email error
-        if "already registered" in error_msg or "already exists" in error_msg:
+        if "already registered" in error_msg.lower() or "already exists" in error_msg.lower():
+            logger.warning(f"Duplicate email registration attempt: {request.email}")
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
                 detail="Email already registered"
             )
         
         # Validation error
+        logger.warning(f"Registration validation failed: {error_msg}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=error_msg
         )
     
     except Exception as e:
+        logger.error(f"Registration failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Registration failed"
@@ -147,6 +153,7 @@ async def login(
         )
     
     except Exception as e:
+        logger.error("login_failed", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Login failed"
@@ -209,7 +216,7 @@ async def logout(
     }
 )
 async def refresh_token(
-    request: dict = None,
+    request: RefreshTokenRequest,
     db: Session = Depends(get_db)
 ) -> TokenResponse:
     """
@@ -227,18 +234,9 @@ async def refresh_token(
     """
     auth_service = AuthService(db)
     
-    # Note: In production, refresh_token should come from HTTP-only cookie
-    # For MVP, accepting it in request body or header
-    if not request or "refresh_token" not in request:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Missing refresh token",
-            headers={"WWW-Authenticate": "Bearer"}
-        )
-    
     try:
         result = auth_service.refresh_access_token(
-            refresh_token=request["refresh_token"]
+            refresh_token=request.refresh_token
         )
         
         return TokenResponse(
@@ -250,6 +248,7 @@ async def refresh_token(
         )
     
     except ValueError as e:
+        logger.warning(f"Token refresh failed: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid refresh token",
@@ -257,6 +256,7 @@ async def refresh_token(
         )
     
     except Exception as e:
+        logger.error(f"Refresh token failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Token refresh failed"
@@ -296,9 +296,6 @@ async def get_current_user(
         )
     
     # Validate token
-    from src.repositories.user_repository import UserRepository
-    from uuid import UUID
-    
     token = credentials.credentials
     payload = jwt_handler.verify_access_token(token)
     
@@ -309,12 +306,23 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    user_repo = UserRepository(db)
-    user_id = payload.get("sub")
+    # Extract and validate user_id from token
+    try:
+        user_id = UUID(payload.get("sub"))
+    except (ValueError, TypeError):
+        logger.warning(f"Invalid user_id in token: {payload.get('sub')}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token payload",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
     
-    user = user_repo.get_by_id(UUID(user_id))
+    # Get user from database
+    user_repo = UserRepository(db)
+    user = user_repo.get_by_id(user_id)
     
     if not user:
+        logger.warning(f"User not found for id: {user_id}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User not found",

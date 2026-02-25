@@ -2,6 +2,8 @@
 Application configuration settings.
 Environment variables are loaded from .env file.
 """
+import json
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 
@@ -68,6 +70,21 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         case_sensitive=True,
     )
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, value):
+        if isinstance(value, list):
+            return value
+        if isinstance(value, str):
+            value = value.strip()
+            if value.startswith("["):
+                try:
+                    return json.loads(value)
+                except json.JSONDecodeError:
+                    pass
+            return [origin.strip() for origin in value.split(",") if origin.strip()]
+        return value
 
 
 @lru_cache()

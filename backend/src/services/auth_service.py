@@ -1,5 +1,5 @@
 """Authentication service for user registration and login."""
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session
 
@@ -38,7 +38,10 @@ class AuthService:
         full_name: str
     ) -> User:
         """
-        Register new user.
+        Register new user without duplicate validation.
+        
+        The User model handles validation internally.
+        Repository will check for duplicate email.
         
         Args:
             email: User email
@@ -51,49 +54,27 @@ class AuthService:
         Raises:
             ValueError: If validation fails or email exists
         """
-        # Normalize email
-        email = email.strip().lower()
-        
-        # Validate email format
-        if not self._validate_email(email):
-            raise ValueError(f"Invalid email format: {email}")
-        
-        # Validate full name
-        if not full_name or len(full_name) < 2:
-            raise ValueError("full_name must be at least 2 characters")
-        
-        # Validate password complexity
-        if not self._validate_password_complexity(password):
-            raise ValueError(
-                "password must be 8+ characters with uppercase, lowercase, digit, and special character"
-            )
-        
-        # Check if email already exists
-        existing_user = self.user_repo.get_by_email(email)
-        if existing_user:
-            raise ValueError(f"Email {email} already registered")
-        
-        # Hash password
-        hashed_password = password_hasher.hash_password(password)
-        
-        # Create user
         try:
+            # Create user (this triggers all validations in User.__init__)
+            hashed_password = password_hasher.hash_password(password)
             user = self.user_repo.create_user(
-                email=email,
+                email=email.strip().lower(),
                 hashed_password=hashed_password,
                 full_name=full_name,
                 role="submitter"  # Default role
             )
             
             logger.info(
-                "user_registered",
-                user_id=str(user.id),
-                email=user.email
+                f"User registered: {user.email}",
+                user_id=str(user.id)
             )
             
             return user
+        except ValueError as e:
+            # Repository/model validation error
+            raise ValueError(str(e))
         except Exception as e:
-            logger.error("registration_failed", error=str(e), email=email)
+            logger.error(f"Registration failed: {str(e)}", exc_info=True)
             raise ValueError(f"Registration failed: {str(e)}")
     
     def authenticate_user(
@@ -121,34 +102,30 @@ class AuthService:
         user = self.user_repo.get_by_email(email)
         
         if not user:
-            logger.warning("login_failed_user_not_found", email=email)
+            # Don't reveal whether user exists for security
+            logger.warning(f"Login failed - user not found: {email}")
             raise ValueError("Invalid credentials")
         
         # Check if user is active
         if not user.is_active:
-            logger.warning("login_failed_inactive_user", user_id=str(user.id), email=email)
+            logger.warning(f"Login failed - inactive user: {email}")
             raise ValueError("Account is inactive or disabled")
         
         # Verify password
         if not password_hasher.verify_password(password, user.hashed_password):
-            logger.warning("login_failed_invalid_password", user_id=str(user.id), email=email)
+            logger.warning(f"Login failed - invalid password: {email}")
             raise ValueError("Invalid credentials")
         
-        # Generate tokens
+        # Generate tokens (user.role is already a string)
         access_token = jwt_handler.create_access_token(
             user_id=user.id,
             email=user.email,
-            role=user.role.value
+            role=user.role  # Already a string value
         )
         
         refresh_token = jwt_handler.create_refresh_token(user_id=user.id)
         
-        logger.info(
-            "user_authenticated",
-            user_id=str(user.id),
-            email=user.email,
-            role=user.role.value
-        )
+        logger.info(f"User authenticated: {user.email}", user_id=str(user.id))
         
         return {
             "user": user,
@@ -173,85 +150,36 @@ class AuthService:
         payload = jwt_handler.verify_refresh_token(refresh_token)
         
         if not payload:
-            logger.warning("token_refresh_failed_invalid_token")
+            logger.warning("Token refresh failed - invalid refresh token")
             raise ValueError("Invalid refresh token")
         
-        user_id = payload.get("sub")
+        try:
+            user_id = UUID(payload.get("sub"))
+        except (ValueError, TypeError):
+            logger.warning(f"Token refresh failed - invalid user_id: {payload.get('sub')}")
+            raise ValueError("Invalid refresh token payload")
         
         # Get user
-        user = self.user_repo.get_by_id(UUID(user_id))
+        user = self.user_repo.get_by_id(user_id)
         
         if not user:
-            logger.warning("token_refresh_failed_user_not_found", user_id=user_id)
+            logger.warning(f"Token refresh failed - user not found: {user_id}")
             raise ValueError("User not found")
         
         if not user.is_active:
-            logger.warning("token_refresh_failed_inactive_user", user_id=user_id)
+            logger.warning(f"Token refresh failed - inactive user: {user_id}")
             raise ValueError("User account is inactive")
         
-        # Create new access token
+        # Create new access token (user.role is already a string)
         access_token = jwt_handler.create_access_token(
             user_id=user.id,
             email=user.email,
-            role=user.role.value
+            role=user.role  # Already a string value
         )
         
-        logger.info("token_refreshed", user_id=str(user.id))
+        logger.info(f"Access token refreshed for user: {user.email}", user_id=str(user.id))
         
         return {
             "access_token": access_token,
             "user": user
         }
-    
-    @staticmethod
-    def _validate_email(email: str) -> bool:
-        """
-        Validate email format.
-        
-        Prevents:
-        - Consecutive dots in local or domain part (test..user@example.com)
-        - Leading/trailing dots in local or domain parts
-        - Spaces in email address
-        
-        Args:
-            email: Email to validate
-            
-        Returns:
-            True if valid, False otherwise
-        """
-        import re
-        # Pattern with negative lookahead to prevent consecutive dots
-        # Allows: letters, digits, dots, underscores, plus, percent, hyphen
-        # Pattern: (?!.*\.\.) prevents .. anywhere in the string
-        pattern = r'^(?!.*\.\.)[a-zA-Z0-9][a-zA-Z0-9._+%-]*[a-zA-Z0-9]@(?!.*\.\.)[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\.[a-zA-Z]{2,}$|^[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\.[a-zA-Z]{2,}$'
-        return bool(re.match(pattern, email))
-    
-    @staticmethod
-    def _validate_password_complexity(password: str) -> bool:
-        """
-        Validate password complexity.
-        
-        Requirements:
-        - 8+ characters
-        - At least one uppercase letter
-        - At least one lowercase letter
-        - At least one digit
-        - At least one special character
-        
-        Args:
-            password: Password to validate
-            
-        Returns:
-            True if valid, False otherwise
-        """
-        import re
-        
-        if len(password) < 8:
-            return False
-        
-        has_upper = bool(re.search(r'[A-Z]', password))
-        has_lower = bool(re.search(r'[a-z]', password))
-        has_digit = bool(re.search(r'\d', password))
-        has_special = bool(re.search(r'[!@#$%^&*()_+\-=\[\]{};:\'",.<>?/\\|`~]', password))
-        
-        return has_upper and has_lower and has_digit and has_special

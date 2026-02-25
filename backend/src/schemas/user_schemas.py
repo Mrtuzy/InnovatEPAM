@@ -43,6 +43,19 @@ class LoginRequest(PydanticBase):
     )
 
 
+class RefreshTokenRequest(PydanticBase):
+    """Refresh token request schema."""
+    refresh_token: str = Field(..., description="JWT refresh token")
+    
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGc..."
+            }
+        }
+    )
+
+
 class UserResponse(BaseSchema):
     """User response schema (safe to expose in API)."""
     id: UUID

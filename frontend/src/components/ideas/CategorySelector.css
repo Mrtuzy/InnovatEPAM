@@ -1,0 +1,75 @@
+/* Category Selector Component Styles */
+
+.category-selector {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.category-selector-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #f56565;
+}
+
+.category-selector-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: white;
+  color: #2d3748;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-selector-select:hover:not(:disabled) {
+  border-color: #cbd5e0;
+}
+
+.category-selector-select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.category-selector-select:disabled {
+  background-color: #edf2f7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.category-selector-select.error {
+  border-color: #f56565;
+}
+
+.category-selector-loading {
+  padding: 0.75rem 1rem;
+  color: #718096;
+  font-style: italic;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #f7fafc;
+}
+
+.category-selector-error {
+  color: #f56565;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.category-selector-description {
+  color: #718096;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-style: italic;
+}

@@ -1,0 +1,82 @@
+/* Submit Idea Page Styles */
+
+.submit-idea-page {
+  min-height: 100vh;
+  background-color: #f7fafc;
+  padding: 2rem 1rem;
+}
+
+.submit-idea-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.submit-idea-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.submit-idea-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.submit-idea-description {
+  font-size: 1.125rem;
+  color: #4a5568;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.submit-idea-guidelines {
+  background-color: #ebf8ff;
+  border-left: 4px solid #4299e1;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.guidelines-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c5282;
+  margin-bottom: 1rem;
+}
+
+.guidelines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.guidelines-list li {
+  padding: 0.5rem 0;
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+.guidelines-list li strong {
+  color: #2c5282;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .submit-idea-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .submit-idea-title {
+    font-size: 1.875rem;
+  }
+
+  .submit-idea-description {
+    font-size: 1rem;
+  }
+
+  .submit-idea-guidelines {
+    padding: 1rem;
+  }
+}

@@ -49,6 +49,12 @@ class UserRepository(BaseRepository[User]):
             ValueError: If validation fails
             IntegrityError: If email already exists
         """
+        # Validate role value against enum
+        from src.models.user import UserRole
+        valid_roles = [r.value for r in UserRole]
+        if role not in valid_roles:
+            raise ValueError(f"Invalid role: {role}. Must be one of {valid_roles}")
+        
         try:
             user = User(
                 email=email,
@@ -60,13 +66,17 @@ class UserRepository(BaseRepository[User]):
             self.db.commit()
             self.db.refresh(user)
             return user
-        except IntegrityError:
+        except IntegrityError as e:
             self.db.rollback()
-            raise IntegrityError(
-                "Email already exists",
-                None,
-                None
-            )
+            # Extract meaningful error from database
+            if "users_email_key" in str(e) or "uq_users_email" in str(e):
+                raise ValueError(f"Email {email} already registered")
+            raise ValueError(f"Database constraint error: {str(e)}")
+        except ValueError:
+            raise
+        except Exception as e:
+            self.db.rollback()
+            raise ValueError(f"Failed to create user: {str(e)}")
     
     def get_by_email(self, email: str) -> Optional[User]:
         """

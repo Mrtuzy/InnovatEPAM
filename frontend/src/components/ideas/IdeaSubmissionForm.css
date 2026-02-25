@@ -1,0 +1,167 @@
+/* Idea Submission Form Styles */
+
+.idea-submission-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.idea-form-alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.idea-form-alert-error {
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #fc8181;
+}
+
+.idea-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.idea-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #f56565;
+}
+
+.optional {
+  color: #718096;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.idea-form-input,
+.idea-form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: inherit;
+  color: #2d3748;
+  transition: all 0.2s;
+}
+
+.idea-form-input:focus,
+.idea-form-textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.idea-form-input:disabled,
+.idea-form-textarea:disabled {
+  background-color: #edf2f7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.idea-form-input.error,
+.idea-form-textarea.error {
+  border-color: #f56565;
+}
+
+.idea-form-textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.idea-form-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.character-count {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.character-count.warning {
+  color: #ed8936;
+  font-weight: 600;
+}
+
+.idea-form-error {
+  color: #f56565;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.idea-form-hint {
+  color: #718096;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.idea-form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.idea-form-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.idea-form-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.idea-form-btn-primary {
+  background-color: #4299e1;
+  color: white;
+}
+
+.idea-form-btn-primary:hover:not(:disabled) {
+  background-color: #3182ce;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.idea-form-btn-secondary {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.idea-form-btn-secondary:hover:not(:disabled) {
+  background-color: #cbd5e0;
+}
+
+@media (max-width: 768px) {
+  .idea-submission-form {
+    padding: 1rem;
+  }
+
+  .idea-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .idea-form-btn {
+    width: 100%;
+  }
+}
