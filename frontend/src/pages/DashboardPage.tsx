@@ -2,13 +2,27 @@
  * Dashboard page.
  * Shows user profile and main portal features.
  */
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 const DashboardPage: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [message, setMessage] = useState<string>('');
+
+  useEffect(() => {
+    // Check for message from navigation state
+    if (location.state?.message) {
+      setMessage(location.state.message);
+      // Clear the state
+      window.history.replaceState({}, document.title);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => setMessage(''), 5000);
+    }
+  }, [location]);
 
   const handleLogout = async () => {
     await logout();
@@ -25,6 +39,12 @@ const DashboardPage: React.FC = () => {
           </div>
           <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
+
+        {message && (
+          <div className="alert alert-warning" style={{ marginBottom: '1.5rem' }}>
+            {message}
+          </div>
+        )}
 
         <div className="dashboard-grid stagger">
           <div className="panel-card">
@@ -44,18 +64,8 @@ const DashboardPage: React.FC = () => {
                   >
                     <span className="action-icon">📋</span>
                     <div className="action-content">
-                      <span className="action-title">Review Ideas</span>
+                      <span className="action-title">Review All Ideas</span>
                       <span className="action-subtitle">Evaluate submissions</span>
-                    </div>
-                  </button>
-                  <button 
-                    className="action-button action-secondary" 
-                    onClick={() => navigate('/ideas/submit')}
-                  >
-                    <span className="action-icon">💡</span>
-                    <div className="action-content">
-                      <span className="action-title">Submit Idea</span>
-                      <span className="action-subtitle">Share your innovation</span>
                     </div>
                   </button>
                 </>

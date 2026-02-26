@@ -4,11 +4,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getMyIdeas, Idea } from '../../api/ideas';
+import { useAuth } from '../../hooks/useAuth';
 import './IdeasListPage.css';
 
 const IdeasListPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
@@ -89,15 +91,21 @@ const IdeasListPage: React.FC = () => {
             >
               ← Back to Dashboard
             </button>
-            <h1 className="ideas-title">My Ideas</h1>
-            <p className="ideas-subtitle">View and manage your submitted innovation ideas</p>
+            <h1 className="ideas-title">{user?.role === 'admin' ? 'All Ideas' : 'My Ideas'}</h1>
+            <p className="ideas-subtitle">
+              {user?.role === 'admin' 
+                ? 'Review and evaluate all submitted innovation ideas'
+                : 'View and manage your submitted innovation ideas'}
+            </p>
           </div>
-          <button 
-            className="btn-submit-idea"
-            onClick={() => navigate('/ideas/submit')}
-          >
-            + Submit New Idea
-          </button>
+          {user?.role !== 'admin' && (
+            <button 
+              className="btn-submit-idea"
+              onClick={() => navigate('/ideas/submit')}
+            >
+              + Submit New Idea
+            </button>
+          )}
         </div>
 
         {successMessage && (
@@ -116,13 +124,19 @@ const IdeasListPage: React.FC = () => {
           <div className="empty-state">
             <div className="empty-state-icon">💡</div>
             <h2>No ideas yet</h2>
-            <p>Start contributing by submitting your first innovation idea!</p>
-            <button 
-              className="btn-submit-idea"
-              onClick={() => navigate('/ideas/submit')}
-            >
-              Submit Your First Idea
-            </button>
+            <p>
+              {user?.role === 'admin'
+                ? 'No ideas have been submitted yet.'
+                : 'Start contributing by submitting your first innovation idea!'}
+            </p>
+            {user?.role !== 'admin' && (
+              <button 
+                className="btn-submit-idea"
+                onClick={() => navigate('/ideas/submit')}
+              >
+                Submit Your First Idea
+              </button>
+            )}
           </div>
         ) : (
           <div className="ideas-grid">
@@ -151,6 +165,11 @@ const IdeasListPage: React.FC = () => {
                   <span className="idea-category">
                     📁 {idea.category.name}
                   </span>
+                  {user?.role === 'admin' && (
+                    <span className="idea-submitter">
+                      👤 {idea.submitter.full_name}
+                    </span>
+                  )}
                   {idea.attachment && (
                     <span className="idea-attachment">
                       📎 Attachment

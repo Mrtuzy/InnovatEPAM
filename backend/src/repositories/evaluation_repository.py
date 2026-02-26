@@ -35,14 +35,13 @@ class EvaluationRepository(BaseRepository[Evaluation]):
         Returns:
             Created Evaluation instance
         """
-        evaluation = Evaluation(
+        return self.create(
             idea_id=idea_id,
             evaluator_id=evaluator_id,
             previous_status=previous_status,
             new_status=new_status,
             comment=comment
         )
-        return self.create(evaluation)
     
     def get_evaluations_by_idea(
         self,

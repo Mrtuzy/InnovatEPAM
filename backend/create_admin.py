@@ -3,7 +3,12 @@ import sys
 from sqlalchemy.orm import Session
 
 from src.config.database import SessionLocal
+# Import all models to ensure mapper is initialized
+from src.models.base import BaseModel
 from src.models.user import User
+from src.models.category import Category
+from src.models.idea import Idea
+from src.models.evaluation import Evaluation
 from src.utils.password_hasher import password_hasher
 
 

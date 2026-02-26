@@ -33,7 +33,14 @@ class Settings(BaseSettings):
     DATABASE_ECHO: bool = False
     
     # CORS
-    CORS_ORIGINS: list[str] = ["http://localhost:3000"]
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ]
     
     # File uploads
     MAX_UPLOAD_SIZE: int = 10485760  # 10MB in bytes

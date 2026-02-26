@@ -226,6 +226,12 @@
   font-weight: 500;
 }
 
+.idea-submitter {
+  font-size: 0.875rem;
+  color: #805ad5;
+  font-weight: 500;
+}
+
 .idea-attachment {
   font-size: 0.875rem;
   color: #4299e1;

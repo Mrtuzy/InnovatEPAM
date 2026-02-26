@@ -1,11 +1,29 @@
 /**
- * Submit Idea Page - Protected route for submitters and admins
+ * Submit Idea Page - Protected route for submitters only (not admins)
  */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import IdeaSubmissionForm from '../../components/ideas/IdeaSubmissionForm';
+import { useAuth } from '../../hooks/useAuth';
 import './SubmitIdeaPage.css';
 
 const SubmitIdeaPage: React.FC = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect admins to dashboard
+  useEffect(() => {
+    if (user?.role === 'admin') {
+      navigate('/dashboard', { 
+        state: { message: 'Admins cannot submit ideas. You can only evaluate them.' } 
+      });
+    }
+  }, [user, navigate]);
+
+  // Don't render form for admins (while redirecting)
+  if (user?.role === 'admin') {
+    return null;
+  }
   return (
     <div className="submit-idea-page">
       <div className="submit-idea-container">

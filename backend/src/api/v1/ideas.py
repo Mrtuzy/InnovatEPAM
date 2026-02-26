@@ -47,6 +47,8 @@ async def create_idea(
     """
     Create new idea with optional file attachment.
     
+    Admins cannot submit ideas - only evaluate them.
+    
     Args:
         title: Idea title (10-200 characters)
         description: Detailed description (50-5000 characters)
@@ -58,6 +60,14 @@ async def create_idea(
     Returns:
         Created idea with details
     """
+    # Prevent admins from submitting ideas
+    if current_user.role == "admin":
+        logger.warning(f"Admin {current_user.email} attempted to submit idea")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admins cannot submit ideas"
+        )
+    
     logger.info(f"Creating idea for user {current_user.email}")
     
     idea = await service.create_idea(
@@ -84,6 +94,9 @@ async def get_my_ideas(
     """
     Get current user's ideas with pagination and filtering.
     
+    For admin users, returns ALL ideas from all users.
+    For regular users, returns only their own ideas.
+    
     Args:
         status: Filter by status (submitted, under_review, accepted, rejected, all)
         category_id: Filter by category UUID
@@ -94,7 +107,7 @@ async def get_my_ideas(
         service: Idea service
         
     Returns:
-        Paginated list of user's ideas
+        Paginated list of ideas
     """
     # Validate limit
     if limit < 1 or limit > 100:
@@ -118,16 +131,26 @@ async def get_my_ideas(
             detail=f"Invalid sort. Valid options: {', '.join(valid_sorts)}"
         )
     
-    logger.info(f"Getting ideas for user {current_user.email} (page={page}, limit={limit})")
-    
-    result = service.get_user_ideas(
-        submitter_id=current_user.id,
-        status=status,
-        category_id=category_id,
-        page=page,
-        limit=limit,
-        sort=sort
-    )
+    # Admin users see ALL ideas, regular users see only their own
+    if current_user.role == "admin":
+        logger.info(f"Admin {current_user.email} getting all ideas (page={page}, limit={limit})")
+        result = service.get_all_ideas(
+            status=status,
+            category_id=category_id,
+            page=page,
+            limit=limit,
+            sort=sort
+        )
+    else:
+        logger.info(f"Getting ideas for user {current_user.email} (page={page}, limit={limit})")
+        result = service.get_user_ideas(
+            submitter_id=current_user.id,
+            status=status,
+            category_id=category_id,
+            page=page,
+            limit=limit,
+            sort=sort
+        )
     
     # Convert items to response schema
     items = [IdeaResponse.from_orm_with_attachment(idea) for idea in result['items']]

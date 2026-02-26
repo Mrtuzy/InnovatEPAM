@@ -42,8 +42,13 @@ const EvaluationForm: React.FC<EvaluationFormProps> = ({
       await onSubmit({ new_status: newStatus, comment: comment.trim() });
     } catch (err: any) {
       console.error('Error submitting evaluation:', err);
+      console.error('Error response:', err.response);
+      console.error('Error data:', err.response?.data);
+      
       if (err.response?.data?.detail) {
         setError(err.response.data.detail);
+      } else if (err.message) {
+        setError(`Failed: ${err.message}`);
       } else {
         setError('Failed to submit evaluation. Please try again.');
       }

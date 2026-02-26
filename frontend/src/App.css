@@ -500,3 +500,29 @@ a {
   opacity: 0.9;
   font-weight: 400;
 }
+
+/* Alert Styles */
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: #c6f6d5;
+  color: #22543d;
+  border: 1px solid #9ae6b4;
+}
+
+.alert-error {
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #fc8181;
+}
+
+.alert-warning {
+  background-color: #fef5e7;
+  color: #856404;
+  border: 1px solid #ffc107;
+}
