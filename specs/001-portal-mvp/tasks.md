@@ -95,7 +95,7 @@ This is a web application with:
 
 **E2E Tests (10%)**
 
-- [ ] T037 [US1] E2E test for complete registration and login flow in frontend/tests/e2e/auth/test_registration_login.spec.ts (Playwright: register → verify redirect → login → see dashboard)
+- [X] T037 [US1] E2E test for complete registration and login flow in frontend/tests/e2e/auth/test_registration_login.spec.ts (Playwright: register → verify redirect → login → see dashboard)
 
 ### Implementation for User Story 1
 
@@ -128,19 +128,19 @@ This is a web application with:
 
 **Frontend Components**
 
-- [ ] T050 [P] [US1] Create registration form component in frontend/src/components/auth/RegistrationForm.tsx (email, password, full_name inputs with validation)
-- [ ] T051 [P] [US1] Create login form component in frontend/src/components/auth/LoginForm.tsx (email, password inputs, handles authentication)
-- [ ] T052 [US1] Create registration page in frontend/src/pages/auth/RegisterPage.tsx (uses RegistrationForm, redirects on success)
-- [ ] T053 [US1] Create login page in frontend/src/pages/auth/LoginPage.tsx (uses LoginForm, stores token, updates AuthContext)
-- [ ] T054 [US1] Implement logout functionality in frontend/src/hooks/useAuth.ts (calls logout endpoint, clears auth context, redirects)
-- [ ] T055 [US1] Create protected route component in frontend/src/components/routing/ProtectedRoute.tsx (checks authentication, redirects if not logged in)
-- [ ] T056 [US1] Add authentication routes to frontend/src/routes.tsx (/register, /login, /logout)
+- [X] T050 [P] [US1] Create registration form component in frontend/src/components/auth/RegistrationForm.tsx (email, password, full_name inputs with validation)
+- [X] T051 [P] [US1] Create login form component in frontend/src/components/auth/LoginForm.tsx (email, password inputs, handles authentication)
+- [X] T052 [US1] Create registration page in frontend/src/pages/auth/RegisterPage.tsx (uses RegistrationForm, redirects on success)
+- [X] T053 [US1] Create login page in frontend/src/pages/auth/LoginPage.tsx (uses LoginForm, stores token, updates AuthContext)
+- [X] T054 [US1] Implement logout functionality in frontend/src/hooks/useAuth.ts (calls logout endpoint, clears auth context, redirects)
+- [X] T055 [US1] Create protected route component in frontend/src/components/routing/ProtectedRoute.tsx (checks authentication, redirects if not logged in)
+- [X] T056 [US1] Add authentication routes to frontend/src/routes.tsx (/register, /login, /logout)
 
 **Testing Validation**
 
-- [ ] T057 [US1] Run all US1 unit tests and verify 70% coverage for auth module in backend/tests/unit/
-- [ ] T058 [US1] Run all US1 integration tests and verify API contract compliance in backend/tests/integration/
-- [ ] T059 [US1] Run US1 e2e test and verify complete user journey in frontend/tests/e2e/
+- [X] T057 [US1] Run all US1 unit tests and verify 70% coverage for auth module in backend/tests/unit/
+- [X] T058 [US1] Run all US1 integration tests and verify API contract compliance in backend/tests/integration/
+- [X] T059 [US1] Run US1 e2e test and verify complete user journey in frontend/tests/e2e/
 
 **Checkpoint**: User Story 1 complete - users can register, login, logout, and access protected routes with role-based context
 
@@ -156,69 +156,69 @@ This is a web application with:
 
 **Unit Tests (70%)**
 
-- [ ] T060 [P] [US2] Unit test for Category model in backend/tests/unit/models/test_category.py (name uniqueness, display_order, is_active)
-- [ ] T061 [P] [US2] Unit test for Idea model validation in backend/tests/unit/models/test_idea.py (title length, description length, status enum, attachment fields consistency)
-- [ ] T062 [P] [US2] Unit test for file handler utility in backend/tests/unit/utils/test_file_handler.py (file type validation, size validation, filename sanitization, path traversal prevention)
-- [ ] T063 [P] [US2] Unit test for IdeaRepository in backend/tests/unit/repositories/test_idea_repository.py (create with attachment, foreign key constraints)
-- [ ] T064 [P] [US2] Unit test for CategoryRepository in backend/tests/unit/repositories/test_category_repository.py (get active categories, get by id)
-- [ ] T065 [P] [US2] Unit test for IdeaService create logic in backend/tests/unit/services/test_idea_service_create.py (validation, category existence check, file upload handling, submitter association)
+- [X] T060 [P] [US2] Unit test for Category model in backend/tests/unit/models/test_category.py (name uniqueness, display_order, is_active)
+- [X] T061 [P] [US2] Unit test for Idea model validation in backend/tests/unit/models/test_idea.py (title length, description length, status enum, attachment fields consistency)
+- [X] T062 [P] [US2] Unit test for file handler utility in backend/tests/unit/utils/test_file_handler.py (file type validation, size validation, filename sanitization, path traversal prevention)
+- [X] T063 [P] [US2] Unit test for IdeaRepository in backend/tests/unit/repositories/test_idea_repository.py (create with attachment, foreign key constraints)
+- [X] T064 [P] [US2] Unit test for CategoryRepository in backend/tests/unit/repositories/test_category_repository.py (get active categories, get by id)
+- [X] T065 [P] [US2] Unit test for IdeaService create logic in backend/tests/unit/services/test_idea_service_create.py (validation, category existence check, file upload handling, submitter association)
 
 **Integration Tests (20%)**
 
-- [ ] T066 [US2] Integration test for POST /api/v1/ideas endpoint in backend/tests/integration/api/test_ideas_create.py (successful creation with attachment, without attachment, invalid category 404, file too large 413, unsupported file type 415, validation errors 400, unauthenticated 401)
-- [ ] T067 [US2] Integration test for GET /api/v1/categories endpoint in backend/tests/integration/api/test_categories.py (returns active categories sorted by display_order)
+- [X] T066 [US2] Integration test for POST /api/v1/ideas endpoint in backend/tests/integration/api/test_ideas_create.py (successful creation with attachment, without attachment, invalid category 404, file too large 413, unsupported file type 415, validation errors 400, unauthenticated 401)
+- [X] T067 [US2] Integration test for GET /api/v1/categories endpoint in backend/tests/integration/api/test_categories.py (returns active categories sorted by display_order)
 
 **E2E Tests (10%)**
 
-- [ ] T068 [US2] E2E test for idea submission flow in frontend/tests/e2e/ideas/test_idea_submission.spec.ts (Playwright: login → navigate to submit form → fill fields → attach file → submit → verify success message)
+- [X] T068 [US2] E2E test for idea submission flow in frontend/tests/e2e/ideas/test_idea_submission.spec.ts (Playwright: login → navigate to submit form → fill fields → attach file → submit → verify success message)
 
 ### Implementation for User Story 2
 
 **Backend Models**
 
-- [ ] T069 [P] [US2] Create Category model in backend/src/models/category.py (id UUID PK, name unique, description, display_order, is_active, timestamps)
-- [ ] T070 [US2] Create Idea model in backend/src/models/idea.py (id UUID PK, title, description, category_id FK, submitter_id FK, status enum, attachment fields, timestamps)
-- [ ] T071 [US2] Create Alembic migration for Category table in backend/alembic/versions/002_create_categories_table.py with seed data for 6 categories
-- [ ] T072 [US2] Create Alembic migration for Idea table in backend/alembic/versions/003_create_ideas_table.py (with indexes on category_id, submitter_id, status, created_at)
+- [X] T069 [P] [US2] Create Category model in backend/src/models/category.py (id UUID PK, name unique, description, display_order, is_active, timestamps)
+- [X] T070 [US2] Create Idea model in backend/src/models/idea.py (id UUID PK, title, description, category_id FK, submitter_id FK, status enum, attachment fields, timestamps)
+- [X] T071 [US2] Create Alembic migration for Category table in backend/alembic/versions/002_create_categories_table.py with seed data for 6 categories
+- [X] T072 [US2] Create Alembic migration for Idea table in backend/alembic/versions/003_create_ideas_table.py (with indexes on category_id, submitter_id, status, created_at)
 
 **Backend Utils**
 
-- [ ] T073 [US2] Implement file handler utility in backend/src/utils/file_handler.py (validate_file_type, validate_file_size, sanitize_filename, save_file, generate_storage_path, MAX_FILE_SIZE=10MB)
+- [X] T073 [US2] Implement file handler utility in backend/src/utils/file_handler.py (validate_file_type, validate_file_size, sanitize_filename, save_file, generate_storage_path, MAX_FILE_SIZE=10MB)
 
 **Backend Repositories**
 
-- [ ] T074 [P] [US2] Implement CategoryRepository in backend/src/repositories/category_repository.py (get_active_categories, get_by_id)
-- [ ] T075 [US2] Implement IdeaRepository in backend/src/repositories/idea_repository.py (create with attachment metadata, get_by_id, get_by_submitter)
+- [X] T074 [P] [US2] Implement CategoryRepository in backend/src/repositories/category_repository.py (get_active_categories, get_by_id)
+- [X] T075 [US2] Implement IdeaRepository in backend/src/repositories/idea_repository.py (create with attachment metadata, get_by_id, get_by_submitter)
 
 **Backend Schemas**
 
-- [ ] T076 [P] [US2] Create category schemas in backend/src/schemas/category_schemas.py (CategoryResponse with id/name/description)
-- [ ] T077 [P] [US2] Create idea request schemas in backend/src/schemas/idea_schemas.py (IdeaCreateRequest with title/description/category_id validation)
-- [ ] T078 [P] [US2] Create idea response schemas in backend/src/schemas/idea_schemas.py (IdeaResponse with nested category, submitter, attachment details)
+- [X] T076 [P] [US2] Create category schemas in backend/src/schemas/category_schemas.py (CategoryResponse with id/name/description)
+- [X] T077 [P] [US2] Create idea request schemas in backend/src/schemas/idea_schemas.py (IdeaCreateRequest with title/description/category_id validation)
+- [X] T078 [P] [US2] Create idea response schemas in backend/src/schemas/idea_schemas.py (IdeaResponse with nested category, submitter, attachment details)
 
 **Backend Services**
 
-- [ ] T079 [US2] Implement IdeaService in backend/src/services/idea_service.py (create_idea with category validation, file processing, submitter association, status initialization to "submitted")
+- [X] T079 [US2] Implement IdeaService in backend/src/services/idea_service.py (create_idea with category validation, file processing, submitter association, status initialization to "submitted")
 
 **Backend API Endpoints**
 
-- [ ] T080 [US2] Implement POST /api/v1/ideas endpoint in backend/src/api/v1/ideas.py (multipart/form-data, requires auth, calls IdeaService, returns 201)
-- [ ] T081 [US2] Implement GET /api/v1/categories endpoint in backend/src/api/v1/categories.py (public or authenticated, returns active categories)
-- [ ] T082 [US2] Register ideas and categories routers in backend/src/api/v1/__init__.py
+- [X] T080 [US2] Implement POST /api/v1/ideas endpoint in backend/src/api/v1/ideas.py (multipart/form-data, requires auth, calls IdeaService, returns 201)
+- [X] T081 [US2] Implement GET /api/v1/categories endpoint in backend/src/api/v1/categories.py (public or authenticated, returns active categories)
+- [X] T082 [US2] Register ideas and categories routers in backend/src/api/v1/__init__.py
 
 **Frontend Components**
 
-- [ ] T083 [P] [US2] Create idea submission form component in frontend/src/components/ideas/IdeaSubmissionForm.tsx (title, description, category dropdown, file upload with validation)
-- [ ] T084 [P] [US2] Create category selector component in frontend/src/components/ideas/CategorySelector.tsx (fetches categories from API, dropdown)
-- [ ] T085 [P] [US2] Create file upload component in frontend/src/components/ideas/FileUpload.tsx (drag-drop, size/type validation, preview)
-- [ ] T086 [US2] Create idea submission page in frontend/src/pages/ideas/SubmitIdeaPage.tsx (uses IdeaSubmissionForm, protected route for submitters/admins)
-- [ ] T087 [US2] Add idea submission route to frontend/src/routes.tsx (/ideas/submit)
+- [X] T083 [P] [US2] Create idea submission form component in frontend/src/components/ideas/IdeaSubmissionForm.tsx (title, description, category dropdown, file upload with validation)
+- [X] T084 [P] [US2] Create category selector component in frontend/src/components/ideas/CategorySelector.tsx (fetches categories from API, dropdown)
+- [X] T085 [P] [US2] Create file upload component in frontend/src/components/ideas/FileUpload.tsx (drag-drop, size/type validation, preview)
+- [X] T086 [US2] Create idea submission page in frontend/src/pages/ideas/SubmitIdeaPage.tsx (uses IdeaSubmissionForm, protected route for submitters/admins)
+- [X] T087 [US2] Add idea submission route to frontend/src/routes.tsx (/ideas/submit)
 
 **Testing Validation**
 
-- [ ] T088 [US2] Run all US2 unit tests and verify coverage for ideas module in backend/tests/unit/
-- [ ] T089 [US2] Run all US2 integration tests and verify API contract compliance in backend/tests/integration/
-- [ ] T090 [US2] Run US2 e2e test and verify complete submission journey in frontend/tests/e2e/
+- [X] T088 [US2] Run all US2 unit tests and verify coverage for ideas module in backend/tests/unit/
+- [X] T089 [US2] Run all US2 integration tests and verify API contract compliance in backend/tests/integration/
+- [X] T090 [US2] Run US2 e2e test and verify complete submission journey in frontend/tests/e2e/
 
 **Checkpoint**: User Story 2 complete - submitters can create ideas with attachments, categories are available, ideas stored with "submitted" status
 
@@ -234,56 +234,56 @@ This is a web application with:
 
 **Unit Tests (70%)**
 
-- [ ] T091 [P] [US3] Unit test for IdeaRepository list queries in backend/tests/unit/repositories/test_idea_repository_list.py (get_by_submitter with pagination, get_all with pagination, filtering by status/category, sorting)
-- [ ] T092 [P] [US3] Unit test for IdeaService list logic in backend/tests/unit/services/test_idea_service_list.py (RBAC filtering: submitter sees only own ideas, admin sees all, pagination calculation)
-- [ ] T093 [P] [US3] Unit test for IdeaService detail logic in backend/tests/unit/services/test_idea_service_detail.py (get by id with authorization check: submitter can view own, admin can view any, other users get 403)
+- [X] T091 [P] [US3] Unit test for IdeaRepository list queries in backend/tests/unit/repositories/test_idea_repository_list.py (get_by_submitter with pagination, get_all with pagination, filtering by status/category, sorting)
+- [X] T092 [P] [US3] Unit test for IdeaService list logic in backend/tests/unit/services/test_idea_service_list.py (RBAC filtering: submitter sees only own ideas, admin sees all, pagination calculation)
+- [X] T093 [P] [US3] Unit test for IdeaService detail logic in backend/tests/unit/services/test_idea_service_detail.py (get by id with authorization check: submitter can view own, admin can view any, other users get 403)
 
 **Integration Tests (20%)**
 
-- [ ] T094 [US3] Integration test for GET /api/v1/ideas endpoint in backend/tests/integration/api/test_ideas_list.py (submitter sees only own ideas, admin sees all, pagination headers, status filter, category filter, sorting, unauthenticated 401)
-- [ ] T095 [US3] Integration test for GET /api/v1/ideas/{id} endpoint in backend/tests/integration/api/test_ideas_detail.py (submitter views own idea, admin views any idea, submitter cannot view other's idea 403, invalid ID 404)
-- [ ] T096 [US3] Integration test for GET /api/v1/ideas/{id}/attachment endpoint in backend/tests/integration/api/test_ideas_attachment.py (authorized download returns file, unauthorized 403, non-existent attachment 404)
+- [X] T094 [US3] Integration test for GET /api/v1/ideas endpoint in backend/tests/integration/api/test_ideas_list.py (submitter sees only own ideas, admin sees all, pagination headers, status filter, category filter, sorting, unauthenticated 401)
+- [X] T095 [US3] Integration test for GET /api/v1/ideas/{id} endpoint in backend/tests/integration/api/test_ideas_detail.py (submitter views own idea, admin views any idea, submitter cannot view other's idea 403, invalid ID 404)
+- [X] T096 [US3] Integration test for GET /api/v1/ideas/{id}/attachment endpoint in backend/tests/integration/api/test_ideas_attachment.py (authorized download returns file, unauthorized 403, non-existent attachment 404)
 
 **E2E Tests (10%)**
 
-- [ ] T097 [US3] E2E test for idea listing and viewing flow in frontend/tests/e2e/ideas/test_idea_list_view.spec.ts (Playwright: login as submitter → see ideas list → click idea → view details → download attachment)
+- [X] T097 [US3] E2E test for idea listing and viewing flow in frontend/tests/e2e/ideas/test_idea_list_view.spec.ts (Playwright: login as submitter → see ideas list → click idea → view details → download attachment)
 
 ### Implementation for User Story 3
 
 **Backend Repository Extensions**
 
-- [ ] T098 [US3] Extend IdeaRepository in backend/src/repositories/idea_repository.py (get_by_submitter_paginated, get_all_paginated, apply_filters for status/category, apply_sorting)
+- [X] T098 [US3] Extend IdeaRepository in backend/src/repositories/idea_repository.py (get_by_submitter_paginated, get_all_paginated, apply_filters for status/category, apply_sorting)
 
 **Backend Services Extensions**
 
-- [ ] T099 [US3] Extend IdeaService in backend/src/services/idea_service.py (list_ideas with RBAC filtering and pagination, get_idea_detail with ownership verification, get_attachment_file with authorization)
+- [X] T099 [US3] Extend IdeaService in backend/src/services/idea_service.py (list_ideas with RBAC filtering and pagination, get_idea_detail with ownership verification, get_attachment_file with authorization)
 
 **Backend Schemas Extensions**
 
-- [ ] T100 [P] [US3] Extend idea schemas in backend/src/schemas/idea_schemas.py (IdeaListResponse with pagination metadata, IdeaSummary for list view with limited fields)
+- [X] T100 [P] [US3] Extend idea schemas in backend/src/schemas/idea_schemas.py (IdeaListResponse with pagination metadata, IdeaSummary for list view with limited fields)
 
 **Backend API Endpoints**
 
-- [ ] T101 [US3] Implement GET /api/v1/ideas endpoint in backend/src/api/v1/ideas.py (query params: status, category_id, page, limit, sort; requires auth; returns paginated list)
-- [ ] T102 [US3] Implement GET /api/v1/ideas/{id} endpoint in backend/src/api/v1/ideas.py (requires auth, RBAC check, returns full idea details)
-- [ ] T103 [US3] Implement GET /api/v1/ideas/{id}/attachment endpoint in backend/src/api/v1/ideas.py (requires auth, RBAC check, returns file with appropriate MIME type)
+- [X] T101 [US3] Implement GET /api/v1/ideas endpoint in backend/src/api/v1/ideas.py (query params: status, category_id, page, limit, sort; requires auth; returns paginated list)
+- [X] T102 [US3] Implement GET /api/v1/ideas/{id} endpoint in backend/src/api/v1/ideas.py (requires auth, RBAC check, returns full idea details)
+- [X] T103 [US3] Implement GET /api/v1/ideas/{id}/attachment endpoint in backend/src/api/v1/ideas.py (requires auth, RBAC check, returns file with appropriate MIME type)
 
 **Frontend Components**
 
-- [ ] T104 [P] [US3] Create idea list component in frontend/src/components/ideas/IdeaList.tsx (displays ideas table/grid with title, status, category, date, pagination controls)
-- [ ] T105 [P] [US3] Create idea card component in frontend/src/components/ideas/IdeaCard.tsx (summary view for list display)
-- [ ] T106 [P] [US3] Create idea detail component in frontend/src/components/ideas/IdeaDetail.tsx (full idea view with description, category, status, attachment download button, evaluation history)
-- [ ] T107 [P] [US3] Create pagination component in frontend/src/components/common/Pagination.tsx (reusable pagination controls)
-- [ ] T108 [P] [US3] Create filter component in frontend/src/components/ideas/IdeaFilters.tsx (status filter, category filter, sort dropdown)
-- [ ] T109 [US3] Create ideas list page in frontend/src/pages/ideas/IdeasListPage.tsx (uses IdeaList, IdeaFilters, protected route)
-- [ ] T110 [US3] Create idea detail page in frontend/src/pages/ideas/IdeaDetailPage.tsx (uses IdeaDetail, protected route, fetches by ID from URL param)
-- [ ] T111 [US3] Add idea viewing routes to frontend/src/routes.tsx (/ideas, /ideas/:id)
+- [X] T104 [P] [US3] Create idea list component in frontend/src/components/ideas/IdeaList.tsx (displays ideas table/grid with title, status, category, date, pagination controls)
+- [X] T105 [P] [US3] Create idea card component in frontend/src/components/ideas/IdeaCard.tsx (summary view for list display)
+- [X] T106 [P] [US3] Create idea detail component in frontend/src/components/ideas/IdeaDetail.tsx (full idea view with description, category, status, attachment download button, evaluation history)
+- [X] T107 [P] [US3] Create pagination component in frontend/src/components/common/Pagination.tsx (reusable pagination controls)
+- [X] T108 [P] [US3] Create filter component in frontend/src/components/ideas/IdeaFilters.tsx (status filter, category filter, sort dropdown)
+- [X] T109 [US3] Create ideas list page in frontend/src/pages/ideas/IdeasListPage.tsx (uses IdeaList, IdeaFilters, protected route)
+- [X] T110 [US3] Create idea detail page in frontend/src/pages/ideas/IdeaDetailPage.tsx (uses IdeaDetail, protected route, fetches by ID from URL param)
+- [X] T111 [US3] Add idea viewing routes to frontend/src/routes.tsx (/ideas, /ideas/:id)
 
 **Testing Validation**
 
-- [ ] T112 [US3] Run all US3 unit tests and verify coverage for list/detail operations in backend/tests/unit/
-- [ ] T113 [US3] Run all US3 integration tests and verify API contract compliance in backend/tests/integration/
-- [ ] T114 [US3] Run US3 e2e test and verify complete viewing journey in frontend/tests/e2e/
+- [X] T112 [US3] Run all US3 unit tests and verify coverage for list/detail operations in backend/tests/unit/
+- [X] T113 [US3] Run all US3 integration tests and verify API contract compliance in backend/tests/integration/
+- [X] T114 [US3] Run US3 e2e test and verify complete viewing journey in frontend/tests/e2e/
 
 **Checkpoint**: User Story 3 complete - users can view idea lists (filtered by role), view details, download attachments with proper authorization
 
@@ -299,57 +299,57 @@ This is a web application with:
 
 **Unit Tests (70%)**
 
-- [ ] T115 [P] [US4] Unit test for Evaluation model in backend/tests/unit/models/test_evaluation.py (idea_id FK, evaluator_id FK, status transition validation, comment requirement)
-- [ ] T116 [P] [US4] Unit test for EvaluationRepository in backend/tests/unit/repositories/test_evaluation_repository.py (create evaluation, get evaluations by idea)
-- [ ] T117 [P] [US4] Unit test for IdeaService evaluation logic in backend/tests/unit/services/test_idea_service_evaluate.py (admin-only check, status transition validation, comment requirement, previous status verification, create evaluation record)
+- [X] T115 [P] [US4] Unit test for Evaluation model in backend/tests/unit/models/test_evaluation.py (idea_id FK, evaluator_id FK, status transition validation, comment requirement)
+- [X] T116 [P] [US4] Unit test for EvaluationRepository in backend/tests/unit/repositories/test_evaluation_repository.py (create evaluation, get evaluations by idea)
+- [X] T117 [P] [US4] Unit test for IdeaService evaluation logic in backend/tests/unit/services/test_idea_service_evaluate.py (admin-only check, status transition validation, comment requirement, previous status verification, create evaluation record)
 
 **Integration Tests (20%)**
 
-- [ ] T118 [US4] Integration test for POST /api/v1/ideas/{id}/evaluate endpoint in backend/tests/integration/api/test_ideas_evaluate.py (admin accepts with comment, admin rejects with comment, admin sets under_review, non-admin forbidden 403, invalid status transition 400, missing comment 400)
-- [ ] T119 [US4] Integration test for GET /api/v1/ideas/{id}/evaluations endpoint in backend/tests/integration/api/test_ideas_evaluations.py (returns evaluation history ordered by created_at desc, admin and submitter can view)
+- [X] T118 [US4] Integration test for POST /api/v1/ideas/{id}/evaluate endpoint in backend/tests/integration/api/test_ideas_evaluate.py (admin accepts with comment, admin rejects with comment, admin sets under_review, non-admin forbidden 403, invalid status transition 400, missing comment 400)
+- [X] T119 [US4] Integration test for GET /api/v1/ideas/{id}/evaluations endpoint in backend/tests/integration/api/test_ideas_evaluations.py (returns evaluation history ordered by created_at desc, admin and submitter can view)
 
 **E2E Tests (10%)**
 
-- [ ] T120 [US4] E2E test for admin evaluation flow in frontend/tests/e2e/admin/test_evaluation.spec.ts (Playwright: login as admin → view ideas list → click idea → evaluate with comment → verify status change → logout → login as submitter → verify comment visible)
+- [X] T120 [US4] E2E test for admin evaluation flow in frontend/tests/e2e/admin/test_evaluation.spec.ts (Playwright: login as admin → view ideas list → click idea → evaluate with comment → verify status change → logout → login as submitter → verify comment visible)
 
 ### Implementation for User Story 4
 
 **Backend Models**
 
-- [ ] T121 [US4] Create Evaluation model in backend/src/models/evaluation.py (id UUID PK, idea_id FK, evaluator_id FK, previous_status, new_status, comment, created_at)
-- [ ] T122 [US4] Create Alembic migration for Evaluation table in backend/alembic/versions/004_create_evaluations_table.py (with indexes on idea_id, evaluator_id, created_at)
+- [X] T121 [US4] Create Evaluation model in backend/src/models/evaluation.py (id UUID PK, idea_id FK, evaluator_id FK, previous_status, new_status, comment, created_at)
+- [X] T122 [US4] Create Alembic migration for Evaluation table in backend/alembic/versions/004_create_evaluations_table.py (with indexes on idea_id, evaluator_id, created_at)
 
 **Backend Repositories**
 
-- [ ] T123 [US4] Implement EvaluationRepository in backend/src/repositories/evaluation_repository.py (create_evaluation, get_evaluations_by_idea)
+- [X] T123 [US4] Implement EvaluationRepository in backend/src/repositories/evaluation_repository.py (create_evaluation, get_evaluations_by_idea)
 
 **Backend Schemas**
 
-- [ ] T124 [P] [US4] Create evaluation request schemas in backend/src/schemas/evaluation_schemas.py (EvaluateRequest with new_status enum and comment validation)
-- [ ] T125 [P] [US4] Create evaluation response schemas in backend/src/schemas/evaluation_schemas.py (EvaluationResponse with evaluator info, previous/new status, comment, timestamp)
+- [X] T124 [P] [US4] Create evaluation request schemas in backend/src/schemas/evaluation_schemas.py (EvaluateRequest with new_status enum and comment validation)
+- [X] T125 [P] [US4] Create evaluation response schemas in backend/src/schemas/evaluation_schemas.py (EvaluationResponse with evaluator info, previous/new status, comment, timestamp)
 
 **Backend Services Extensions**
 
-- [ ] T126 [US4] Extend IdeaService in backend/src/services/idea_service.py (evaluate_idea with admin role check, status transition validation, comment requirement, create evaluation record, update idea status)
+- [X] T126 [US4] Extend IdeaService in backend/src/services/idea_service.py (evaluate_idea with admin role check, status transition validation, comment requirement, create evaluation record, update idea status)
 
 **Backend API Endpoints**
 
-- [ ] T127 [US4] Implement POST /api/v1/ideas/{id}/evaluate endpoint in backend/src/api/v1/ideas.py (requires auth, admin-only RBAC middleware, calls IdeaService.evaluate_idea)
-- [ ] T128 [US4] Implement GET /api/v1/ideas/{id}/evaluations endpoint in backend/src/api/v1/ideas.py (requires auth, returns evaluation history for idea)
+- [X] T127 [US4] Implement POST /api/v1/ideas/{id}/evaluate endpoint in backend/src/api/v1/ideas.py (requires auth, admin-only RBAC middleware, calls IdeaService.evaluate_idea)
+- [X] T128 [US4] Implement GET /api/v1/ideas/{id}/evaluations endpoint in backend/src/api/v1/ideas.py (requires auth, returns evaluation history for idea)
 
 **Frontend Components**
 
-- [ ] T129 [P] [US4] Create evaluation form component in frontend/src/components/admin/EvaluationForm.tsx (status selector: under_review/accepted/rejected, comment textarea, submit button)
-- [ ] T130 [P] [US4] Create evaluation history component in frontend/src/components/ideas/EvaluationHistory.tsx (displays evaluation timeline with evaluator, status changes, comments)
-- [ ] T131 [US4] Create admin evaluation page in frontend/src/pages/admin/EvaluateIdeaPage.tsx (protected route admin-only, uses IdeaDetail and EvaluationForm)
-- [ ] T132 [US4] Extend idea detail page in frontend/src/pages/ideas/IdeaDetailPage.tsx to show EvaluationHistory for all users
-- [ ] T133 [US4] Add admin evaluation route to frontend/src/routes.tsx (/admin/ideas/:id/evaluate)
+- [X] T129 [P] [US4] Create evaluation form component in frontend/src/components/admin/EvaluationForm.tsx (status selector: under_review/accepted/rejected, comment textarea, submit button)
+- [X] T130 [P] [US4] Create evaluation history component in frontend/src/components/ideas/EvaluationHistory.tsx (displays evaluation timeline with evaluator, status changes, comments)
+- [X] T131 [US4] Create admin evaluation page in frontend/src/pages/admin/EvaluateIdeaPage.tsx (protected route admin-only, uses IdeaDetail and EvaluationForm)
+- [X] T132 [US4] Extend idea detail page in frontend/src/pages/ideas/IdeaDetailPage.tsx to show EvaluationHistory for all users
+- [X] T133 [US4] Add admin evaluation route to frontend/src/routes.tsx (/admin/ideas/:id/evaluate)
 
 **Testing Validation**
 
-- [ ] T134 [US4] Run all US4 unit tests and verify coverage for evaluation module in backend/tests/unit/
-- [ ] T135 [US4] Run all US4 integration tests and verify API contract compliance in backend/tests/integration/
-- [ ] T136 [US4] Run US4 e2e test and verify complete evaluation journey in frontend/tests/e2e/
+- [X] T134 [US4] Run all US4 unit tests and verify coverage for evaluation module in backend/tests/unit/
+- [X] T135 [US4] Run all US4 integration tests and verify API contract compliance in backend/tests/integration/
+- [X] T136 [US4] Run US4 e2e test and verify complete evaluation journey in frontend/tests/e2e/
 
 **Checkpoint**: User Story 4 complete - admins can evaluate ideas with status changes and comments, evaluation history visible to submitters
 
@@ -359,20 +359,20 @@ This is a web application with:
 
 **Purpose**: Improvements that affect multiple user stories and final quality assurance
 
-- [ ] T137 [P] Add API documentation with Swagger/OpenAPI in backend/src/main.py (auto-generated from FastAPI endpoints)
-- [ ] T138 [P] Create README.md in repository root with project overview, quickstart instructions reference
-- [ ] T139 [P] Add comprehensive logging for audit trail in backend/src/services/ (user actions, evaluations, errors)
-- [ ] T140 [P] Implement rate limiting per contracts/auth.md in backend/src/api/middleware/rate_limiter.py (3 registrations/hour, 5 logins/15min)
-- [ ] T141 Code review and refactoring: ensure all functions <30 lines per constitution
-- [ ] T142 Security hardening: HTTPS redirect configuration, secure cookie settings, CORS policy review
-- [ ] T143 Performance optimization: database query optimization, add appropriate indexes review
-- [ ] T144 [P] Frontend accessibility audit and improvements (ARIA labels, keyboard navigation, screen reader support)
-- [ ] T145 [P] Frontend responsive design verification (mobile, tablet, desktop breakpoints)
-- [ ] T146 Run full test suite and verify coverage targets (70% unit, 20% integration, 10% e2e, minimum 80% for auth/ideas modules)
-- [ ] T147 Validate all endpoints against contracts/auth.md and contracts/ideas.md
-- [ ] T148 Execute quickstart.md setup guide to verify documentation accuracy
-- [ ] T149 Create deployment configuration (Docker Compose for development, deployment guide for production)
-- [ ] T150 Final integration test: complete user journey from registration → idea submission → admin evaluation → submitter viewing feedback
+- [X] T137 [P] Add API documentation with Swagger/OpenAPI in backend/src/main.py (auto-generated from FastAPI endpoints)
+- [X] T138 [P] Create README.md in repository root with project overview, quickstart instructions reference
+- [X] T139 [P] Add comprehensive logging for audit trail in backend/src/services/ (user actions, evaluations, errors)
+- [X] T140 [P] Implement rate limiting per contracts/auth.md in backend/src/api/middleware/rate_limiter.py (3 registrations/hour, 5 logins/15min)
+- [X] T141 Code review and refactoring: ensure all functions <30 lines per constitution
+- [X] T142 Security hardening: HTTPS redirect configuration, secure cookie settings, CORS policy review
+- [X] T143 Performance optimization: database query optimization, add appropriate indexes review
+- [X] T144 [P] Frontend accessibility audit and improvements (ARIA labels, keyboard navigation, screen reader support)
+- [X] T145 [P] Frontend responsive design verification (mobile, tablet, desktop breakpoints)
+- [X] T146 Run full test suite and verify coverage targets (70% unit, 20% integration, 10% e2e, minimum 80% for auth/ideas modules)
+- [X] T147 Validate all endpoints against contracts/auth.md and contracts/ideas.md
+- [X] T148 Execute quickstart.md setup guide to verify documentation accuracy
+- [X] T149 Create deployment configuration (Docker Compose for development, deployment guide for production)
+- [X] T150 Final integration test: complete user journey from registration → idea submission → admin evaluation → submitter viewing feedback
 
 ---
 
